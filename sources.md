@@ -22,6 +22,15 @@ Source code is also documentation; exact interfaces and configuration references
 Each source repository retains its own licensing and attribution.
 New guide text uses [BSD-2-Clause](LICENSE).
 
+## Wi-Fi review
+
+The [Wi-Fi chapter](modules/wifi.md) was checked on 2026-11-15 against EmberBSD
+[`4460bde0ec74`](https://github.com/oxtech-ember/EmberBSD/tree/4460bde0ec74f5479fca38dc3b1a44172b2a63a6).
+The review covers net80211 headers, native frame/association/security paths, station-management and aggregation contracts,
+the BSD supplicant backend, native rtw88 integration, and bwfm/aicwf firmware adapters.
+It distinguishes implemented protocol mechanisms from optional provider integration.
+Hardware applicability and physical acceptance remain in DevBoards; no hardware results are copied here.
+
 ## Evidence limits
 
 The initial guide checked documentation, configuration names, command interfaces, and links.

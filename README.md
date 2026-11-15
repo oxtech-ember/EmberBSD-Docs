@@ -23,6 +23,7 @@ For installation, use the OS [Quick Start](https://github.com/oxtech-ember/Ember
 | --- | --- |
 | Write an application | [Architecture](concepts/architecture.md), [SDK](modules/sdk.md), [packages](modules/ports.md), [development](development/README.md) |
 | Adapt a board or driver | [Modularity](concepts/modularity.md), [hardware](modules/hardware.md), [kernel configuration](configuration/kernel-and-hardware.md) |
+| Add a Wi-Fi driver | [Wi-Fi architecture and standards](modules/wifi.md), [driver interfaces](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net80211/docs/README.md) |
 | Build a small device image | [Base OS](modules/base-os.md), [storage](modules/storage.md), [configuration map](configuration/README.md) |
 | Add graphics or inference | [Graphics and compute](modules/graphics-and-compute.md), [package selection](configuration/packages-and-sdk.md) |
 | Extend the agent | [Spark](modules/spark.md), [application configuration](configuration/services-and-applications.md), [Runtime boundary](modules/runtime.md) |

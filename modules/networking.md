@@ -9,6 +9,9 @@ Applications use sockets or a library for their selected application protocol.
 
 ## Wireless responsibilities
 
+Read [Wi-Fi architecture and standards](wifi.md) for native versus FullMAC paths,
+connection lifecycle, supported protocol mechanisms, and the new-driver reading path.
+
 | Layer | Responsibility |
 | --- | --- |
 | Common wireless subsystem | Shared net80211 state, checks, and driver interfaces |
