@@ -86,6 +86,17 @@ The proposed extension architecture compares primary FreeBSD, Zephyr, Apache Nim
 Those upstream implementations are design references, not installed EmberBSD capabilities.
 No new build, pairing, profile-interoperability or physical acceptance result is claimed.
 
+## Driver architecture review
+
+The [driver architecture chapter](modules/drivers.md) was checked on 2026-11-15 against EmberBSD
+[`379a9dcfe484`](https://github.com/oxtech-ember/EmberBSD/tree/379a9dcfe4843631379869c56264c0dbedd73fa6).
+The review covers autoconfiguration and detach, bus-space/DMA manuals and ARM32 DMA implementation,
+mutex and softint constraints, callout/workqueue lifetime, power transitions, usbnet stop/detach,
+wm queue/watchdog paths, and native NVMe submission/completion and polled timeout handling.
+It separates existing kernel mechanisms from the design obligations of each driver.
+The examples establish the named interactions, not complete recovery or hardware support for every adapter.
+No OS build, execution or physical-device acceptance result is added.
+
 ## Evidence limits
 
 The initial guide checked documentation, configuration names, command interfaces, and links.

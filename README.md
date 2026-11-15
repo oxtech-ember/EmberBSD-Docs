@@ -24,6 +24,7 @@ then follow the linked procedure for the selected image or device.
 | --- | --- |
 | Write an application | [Architecture](concepts/architecture.md), [SDK](modules/sdk.md), [packages](modules/ports.md), [development](development/README.md) |
 | Adapt a board or driver | [Modularity](concepts/modularity.md), [hardware](modules/hardware.md), [kernel configuration](configuration/kernel-and-hardware.md) |
+| Understand a driver's lifecycle and resources | [Driver architecture](modules/drivers.md): DMA, interrupts, queues, stop and recovery |
 | Add a Wi-Fi driver | [Wi-Fi architecture and standards](modules/wifi.md), [driver interfaces](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net80211/docs/README.md) |
 | Add a Bluetooth controller or profile | [Bluetooth architecture, profiles and proposed extensions](modules/bluetooth.md), [driver interfaces](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/netbt/docs/README.md) |
 | Add an Ethernet controller, PHY, or USB adapter | [Ethernet architecture and standards](modules/ethernet.md), [driver interfaces](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net/docs/ethernet.md) |

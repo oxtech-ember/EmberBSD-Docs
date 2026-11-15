@@ -46,6 +46,7 @@ A hardware-independent fixture is useful for logic; device access still needs th
 
 ## A subsystem or driver change
 
+Start with [driver architecture](../modules/drivers.md) for the shared lifecycle and resource model.
 Find the common subsystem contract and its existing consumers.
 Separate shared behavior from chip operations and board properties.
 Keep general protocol/state logic with the subsystem, then attach hardware callbacks.

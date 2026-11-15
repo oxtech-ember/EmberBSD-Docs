@@ -34,6 +34,7 @@ For Wi-Fi, shared wireless code and userland security services cooperate with a 
 Firmware offload changes who performs an operation; it still needs explicit state and event ownership.
 For graphics, common DRM interfaces connect display and GPU adapters to userspace libraries and compositors.
 Each adapter reports its actual capabilities and limitations.
+The [driver architecture](../modules/drivers.md) explains resource ownership across DMA, interrupts, queues and recovery.
 
 ## What a module boundary must explain
 
