@@ -11,6 +11,7 @@ Subsystem pages explain architecture. Their linked owner documents define the de
 | [Hardware and boot](hardware.md) | Device discovery, drivers, loader integration, and board descriptions | EmberBSD; hardware reference in DevBoards |
 | [Storage](storage.md) | VFS, filesystem adapters, media access, and image construction | EmberBSD; shared library sources in Ports |
 | [Networking](networking.md) | Network protocols, interfaces, radio integration, and network services | EmberBSD; optional packages in Ports |
+| [Ethernet](ethernet.md) | MAC/PHY boundaries, frame transport, link management, standards, and controller/device integration | EmberBSD; hardware applicability in DevBoards |
 | [Wi-Fi](wifi.md) | Native and firmware MAC boundaries, station security, protocol limits, and driver integration | EmberBSD; hardware applicability in DevBoards |
 | [Graphics and compute](graphics-and-compute.md) | DRM/KMS, Mesa/Vulkan, buffer sharing, UI acceleration, and driver integration | EmberBSD, Ports, and applications; hardware applicability in DevBoards |
 | [Ports](ports.md) | Shared recipes, patches, package roots, and dependency graph | EmberBSD-Ports |

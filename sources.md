@@ -44,6 +44,16 @@ The review separates API availability, backend selection, buffer sharing, hardwa
 Upstream Mesa and Khronos references explain API semantics, not EmberBSD device acceptance.
 Hardware support records remain in DevBoards; no new GPU execution or conformance result is claimed.
 
+## Ethernet review
+
+The [Ethernet chapter](modules/ethernet.md) was checked on 2026-11-15 against EmberBSD
+[`d0b62867b447`](https://github.com/oxtech-ember/EmberBSD/tree/d0b62867b4479ecf126f6e1ad795c15471e15f90).
+The review covers interface/Ethernet lifecycle, packet queues and capabilities, MII/MDIO helpers,
+GENET and EQOS controller paths, wm registration/offloads, PHY adapters, usbnet consumers, VirtIO,
+VLAN/bridge/lagg interfaces, and the enabled wired supplicant backend.
+IEEE references identify standards; source interfaces and driver behavior define the implementation boundary.
+No new controller build, physical-link test, or standards conformance result is claimed.
+
 ## Evidence limits
 
 The initial guide checked documentation, configuration names, command interfaces, and links.
