@@ -97,3 +97,14 @@ When an implementation changes, update its exact documentation at the owner.
 Update this guide when its conceptual explanation or source navigation changes.
 Record a new baseline for the affected owner when checking a later revision.
 Keep architecture intent, implemented behavior, and tested behavior distinguishable.
+
+## Installation and configuration review
+
+The installation/update model, service configuration and documentation ownership were reviewed on 2026-11-15
+against EmberBSD [`343fff8fac54`](https://github.com/oxtech-ember/EmberBSD/tree/343fff8fac548e30560a55a28bd32c68bcfef2c4)
+and SDK [`33a7cf5efba4`](https://github.com/oxtech-ember/EmberBSD-SDK/tree/33a7cf5efba4875404802cead6f66e26d5ef554e).
+The former OS `doc/guide` material was synthesized into the existing configuration and development structure.
+Exact installer procedures remain beside sysinst, which links the immutable historical VM receipts.
+Startup, account, SSH and package details link to source manuals; DevBoards remains the hardware owner.
+The review checked current guided/expert installation limits and separates the implemented host SDK
+from the proposed device Runtime. It adds no build, VM or hardware acceptance result.

@@ -41,6 +41,7 @@ This is a configuration example, not a complete image recipe or a new named prof
 
 ## Detailed guides
 
+- [Installation, updates and recovery](installation-and-updates.md)
 - [Kernel and hardware](kernel-and-hardware.md)
 - [Packages and SDK](packages-and-sdk.md)
 - [Services and applications](services-and-applications.md)

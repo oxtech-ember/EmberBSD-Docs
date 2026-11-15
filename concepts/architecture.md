@@ -69,6 +69,6 @@ These are composition examples, not named installable profiles or claims of univ
 ## Where to go deeper
 
 - [OS purpose and ecosystem](https://github.com/oxtech-ember/EmberBSD/blob/main/README.md)
-- [Source and documentation ownership](https://github.com/oxtech-ember/EmberBSD/blob/main/doc/emberbsd-ownership.md)
+- [Source and documentation ownership](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/development/README.md#documentation-ownership)
 - [SDK build workflow](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/build-workflow.md)
 - [Hardware catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/README.md)

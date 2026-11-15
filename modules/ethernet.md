@@ -84,7 +84,7 @@ Enabling the same delay at both ends can break a link even when discovery succee
 | VLAN, bridge, or aggregation | Virtual-interface configuration composes physical links without adding those protocols to each MAC driver |
 | Addresses, routes, and authentication | Userland configuration selects static addressing or services and, where needed, wired 802.1X |
 
-Use the [installed-system network guide](https://github.com/oxtech-ember/EmberBSD/blob/main/doc/guide/user-guide.md)
+Use the [network and service configuration](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/configuration/services-and-applications.md)
 and the owner's [ifconfig reference](https://github.com/oxtech-ember/EmberBSD/blob/main/sbin/ifconfig/ifconfig.8) for exact configuration.
 Keep installation-specific addresses and credentials outside shared documentation.
 

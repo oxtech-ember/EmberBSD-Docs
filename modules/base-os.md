@@ -37,7 +37,7 @@ These are separate controls; see the [configuration map](../configuration/README
 
 - [OS build guide](https://github.com/oxtech-ember/EmberBSD/blob/main/README.ember.md)
 - [Kernel development](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/development/kernel.md)
-- [Installed-system user guide](https://github.com/oxtech-ember/EmberBSD/blob/main/doc/guide/user-guide.md)
+- [Service and application configuration](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/configuration/services-and-applications.md)
 - [OS source tree](https://github.com/oxtech-ember/EmberBSD)
 
 Source availability does not qualify every inherited architecture or configuration.

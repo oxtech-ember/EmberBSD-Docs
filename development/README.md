@@ -18,6 +18,21 @@ Use this page to find the development path; use the receiving repository's curre
 | Task agent, model adapter, or agent-local tool | [Spark](https://github.com/oxtech-ember/EmberBSD-Spark/blob/main/CONTRIBUTING.md) |
 | Assistant scenario instructions | [Developer skills](https://github.com/oxtech-ember/Ember-Agent-Skills) or [user skills](https://github.com/oxtech-ember/EmberBSD-User-Skills) |
 
+## Documentation ownership
+
+Use this guide for concepts, responsibilities, interactions and configuration choices.
+Source code is also documentation: exact APIs, formats, commands, error handling and executable checks belong to their implementation owner.
+Hardware facts and scoped support evidence belong to DevBoards. Skills select a task and link to these owners.
+Keep one current description instead of copying a manual, hardware table or test report into the guide.
+
+When moving material, identify live links, build inputs, tests and pinned consumers first.
+Publish and check the destination before switching consumers and removing the obsolete page.
+Preserve authorship, licenses and immutable evidence; a new path is not a new build or device test.
+Keep historical commit links when they establish provenance, and update live links to the current owner.
+Use [the contribution rules](../CONTRIBUTING.md#separate-concepts-from-implementation) when maintaining this guide.
+The OS [contribution guide](https://github.com/oxtech-ember/EmberBSD/blob/main/CONTRIBUTING.md#documentation-ownership)
+defines its source-directory boundaries.
+
 ## A first application change
 
 Select an example close to the intended workload.

@@ -50,7 +50,7 @@ They do not become requirements of the base network stack.
 
 ## Read the owner
 
-- [Installed-system network setup](https://github.com/oxtech-ember/EmberBSD/blob/main/doc/guide/user-guide.md)
+- [Network and service configuration](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/configuration/services-and-applications.md)
 - [net80211 contracts](https://github.com/oxtech-ember/EmberBSD/tree/main/sys/net80211/docs)
 - [Ethernet driver interfaces](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net/docs/ethernet.md)
 - [bwfm SAE integration](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/dev/ic/docs/bwfm-sae.md)
