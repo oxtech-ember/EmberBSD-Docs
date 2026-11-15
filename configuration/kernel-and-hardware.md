@@ -25,6 +25,7 @@ Keep kernel and loadable modules from a compatible build.
 
 ACPI/FDT and platform code describe resources such as interrupts, clocks, reset, and power.
 A driver configuration entry does not create these resources.
+Read [buses and device discovery](../modules/buses-and-discovery.md) for how descriptions and bus enumeration select device instances.
 Firmware selection and licensing are separate inputs to the device's documented boot or attachment path.
 
 Use a board record that matches the carrier and revision.

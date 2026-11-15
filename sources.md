@@ -97,6 +97,17 @@ It separates existing kernel mechanisms from the design obligations of each driv
 The examples establish the named interactions, not complete recovery or hardware support for every adapter.
 No OS build, execution or physical-device acceptance result is added.
 
+## Bus and discovery review
+
+The [bus and discovery chapter](modules/buses-and-discovery.md) was checked on 2026-11-15 against EmberBSD
+[`e2943bdad622`](https://github.com/oxtech-ember/EmberBSD/tree/e2943bdad62240d6d61eb00eda06dcae9e137427).
+The review covers ACPI namespace/resource handling and I2C imports; FDT attachment, providers and child imports;
+PCI configuration-space discovery; USB hub/device/interface enumeration; SD/MMC host and SDIO function contracts;
+I2C direct/indirect configuration; SPI controller/client interfaces and optional transfer capabilities.
+DesignWare I2C ACPI/FDT attachments illustrate reuse of one controller core.
+The linked ACPI and Devicetree specifications define terminology and description models, not EmberBSD conformance.
+No build, bus interoperability or physical-device acceptance result is added.
+
 ## Evidence limits
 
 The initial guide checked documentation, configuration names, command interfaces, and links.

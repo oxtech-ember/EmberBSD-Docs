@@ -28,6 +28,7 @@ A new carrier can change wiring or power even when the CPU module is unchanged.
 Keep those facts separate from reusable driver logic.
 
 For a new device, start with the nearest supported bus and subsystem interface.
+Read [buses and device discovery](buses-and-discovery.md) to separate platform description, controller and peripheral work.
 Read [driver architecture](drivers.md) for lifecycle, resource ownership, DMA, interrupts, queues and recovery.
 Add missing common behavior at the subsystem owner, then connect the hardware adapter.
 Check resource release, cancellation, reset, and failure paths as well as successful attachment.

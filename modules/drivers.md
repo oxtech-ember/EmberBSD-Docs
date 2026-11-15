@@ -20,6 +20,7 @@ Hardware applicability remains in [DevBoards](https://github.com/oxtech-ember/Em
 | Kernel helpers | Provide autoconfiguration, locking, DMA mapping, interrupts, timers and worker threads |
 
 The bus attachment and controller core can be separate parts of one driver.
+Read [buses and device discovery](buses-and-discovery.md) for ACPI/FDT, controller backends and peripheral attachment.
 Keep a reusable chip core independent of the way its registers and interrupts are discovered.
 Hardware descriptor rings belong to the adapter; general request policy belongs to the subsystem.
 Use the subsystem's helpers before adding a private queue, protocol parser or recovery policy.
@@ -86,6 +87,8 @@ A typical transfer has four ownership boundaries:
 4. Completion establishes which storage is no longer in use. Synchronization then permits CPU access and eventual reuse.
 
 Payloads, descriptor rings and completion rings each have their own access direction and lifetime.
+If completion status is written by DMA, synchronize that status before reading it.
+Synchronize each completed payload before CPU access.
 An interrupt is a notification to inspect completion state, not permission to reclaim every outstanding buffer.
 CPU locks protect software participants. DMA synchronization handles visibility across the device boundary.
 Register access and its ordering use the bus-space interface; these mechanisms do different jobs.
