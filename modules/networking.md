@@ -31,6 +31,13 @@ Host and firmware must agree on the owner of keys, events, and protocol state.
 Offload capabilities differ between radios. Read the driver's security and firmware limits.
 A generic wireless API does not establish support for every security mode on every device.
 
+## Bluetooth responsibilities
+
+Read [Bluetooth architecture and profiles](bluetooth.md) for HCI transports, the native Classic stack,
+pairing, profile services and the proposed LE extension path.
+Controller detection, authenticated connection and a working profile are separate results.
+PAN uses the common Ethernet/IP configuration above its Bluetooth transport.
+
 ## Configuration
 
 Observe actual interface names before configuring them.

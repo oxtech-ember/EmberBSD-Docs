@@ -68,6 +68,20 @@ The review distinguishes a source package, runtime backend, native transport and
 It establishes no new arbitrary-model support, hardware execution, benchmark or standards-conformance result.
 Hardware applicability and physical acceptance remain in DevBoards.
 
+## Bluetooth review
+
+The [Bluetooth chapter](modules/bluetooth.md) was checked on 2026-11-15 against:
+
+| Owner | Reviewed revision | Material used |
+| --- | --- | --- |
+| EmberBSD | [`73529b6e94a8`](https://github.com/oxtech-ember/EmberBSD/tree/73529b6e94a8f004ef148928cc8857db03db697e) | HCI/L2CAP/RFCOMM/SCO contracts and implementations; USB/UART adapters; controller/firmware setup; pairing helpers and key service; HID, SPP, PAN and audio profiles; startup and focused checks |
+| Ports | [`a2d6d55e841b`](https://github.com/oxtech-ember/EmberBSD-Ports/tree/a2d6d55e841b1ab4223198028a9f5ac5d56da30c) | BluezQt/Bluedevil client boundaries and the native HCI recorder |
+
+Bluetooth SIG references define terminology and standard/profile roles, not EmberBSD conformance.
+The proposed extension architecture compares primary FreeBSD, Zephyr, Apache NimBLE and BlueZ documentation, reviewed on the same date.
+Those upstream implementations are design references, not installed EmberBSD capabilities.
+No new build, pairing, profile-interoperability or physical acceptance result is claimed.
+
 ## Evidence limits
 
 The initial guide checked documentation, configuration names, command interfaces, and links.

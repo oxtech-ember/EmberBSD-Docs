@@ -41,6 +41,10 @@ For an Ethernet controller, PHY, or USB adapter, read the [Ethernet architecture
 and the [driver interface map](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net/docs/ethernet.md).
 Choose between extending a common MAC core, adding a bus attachment, implementing PHY operations, and using `usbnet`.
 
+For a Bluetooth controller or peripheral, read the [architecture and profile boundaries](../modules/bluetooth.md)
+and the [controller/profile interface map](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/netbt/docs/README.md).
+Choose transport, common protocol or profile work; the chapter labels missing capabilities and proposed solutions separately.
+
 For a GPU or display adapter, start with the [graphics architecture](../modules/graphics-and-compute.md)
 and the [kernel/userspace interface map](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/external/bsd/drm2/drm/docs/README.md).
 Choose the render, display, or compute result before selecting the required components.
