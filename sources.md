@@ -54,6 +54,20 @@ VLAN/bridge/lagg interfaces, and the enabled wired supplicant backend.
 IEEE references identify standards; source interfaces and driver behavior define the implementation boundary.
 No new controller build, physical-link test, or standards conformance result is claimed.
 
+## NPU review
+
+The [NPU and inference chapter](modules/npu.md) was checked on 2026-11-15 against:
+
+| Owner | Reviewed revision | Material used |
+| --- | --- | --- |
+| EmberBSD | [`049b6f9e2754`](https://github.com/oxtech-ember/EmberBSD/tree/049b6f9e27543300e969c2ee848d6792db646af8) | Native NPU attachment and VIPLite subset, fixed NN task, host fixture generation, MMU/DMA ownership, frontend/run completion, clock/power contracts, and executable source checks |
+| Ports | [`865fa793bbe6`](https://github.com/oxtech-ember/EmberBSD-Ports/tree/865fa793bbe677d705ba40e304a948ee99a15f83) | ONNX Runtime features/options, LiteRT shared sources and CPU profiles, Compass userspace probe, Mesa Teflon selection, and openTPU tools |
+
+Upstream ONNX, ONNX Runtime, LiteRT and Mesa references explain formats and extension mechanisms.
+The review distinguishes a source package, runtime backend, native transport and executed workload.
+It establishes no new arbitrary-model support, hardware execution, benchmark or standards-conformance result.
+Hardware applicability and physical acceptance remain in DevBoards.
+
 ## Evidence limits
 
 The initial guide checked documentation, configuration names, command interfaces, and links.

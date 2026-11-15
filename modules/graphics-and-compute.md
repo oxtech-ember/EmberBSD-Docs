@@ -151,7 +151,8 @@ Use the existing [UI measurement procedure](https://github.com/oxtech-ember/Embe
 A new compute-only adapter does not need fake KMS objects or a desktop stack.
 Use a supported GPU compute API where it fits; a dedicated accelerator needs its actual userspace runtime and execution contract.
 Model parsing, graph lowering, tensor preparation, and reference results belong to that runtime or its tests.
-The current [native NPU task](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/arch/arm/sunxi/docs/a733-npu-tiny-task.md) is a fixed trusted workload, not a general model-upload API.
+Read [NPU and inference acceleration](npu.md) for runtime/provider boundaries, model formats, numerical correctness,
+and the limits of the current fixed native task.
 CPU inference and model services remain independent choices; see the [local inference example](https://github.com/oxtech-ember/EmberBSD-Examples/tree/main/ai/local-inference).
 
 ## Read next
