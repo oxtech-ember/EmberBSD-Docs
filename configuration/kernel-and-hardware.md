@@ -6,26 +6,19 @@ The kernel configuration declares compiled options and device attachments.
 Platform descriptions provide the hardware resources those drivers consume.
 Keep these inputs consistent with the loader and selected target.
 
-## Read a kernel configuration
+## Understand a kernel configuration
 
-The AArch64 `EMBER64` configuration includes `GENERIC64` and adds EmberBSD-specific selections.
-This abbreviated excerpt illustrates the syntax:
+A kernel configuration combines a base selection with the facilities needed by a target.
+Some choices enable shared subsystems. Others permit drivers to attach to matching devices.
+Software device facilities can exist without a corresponding physical chip.
+The source declarations define the exact dependencies and compiled files.
 
-```text
-include "arch/evbarm/conf/GENERIC64"
-options SPLASHSCREEN
-aicwf* at sdmmc?
-pseudo-device btuart
-```
+For example, choosing wireless driver support includes the software needed to communicate with a radio.
+The board must still provide the expected bus connection, power, and firmware.
+Selecting that code does not establish radio operation on a new board.
 
-`include` imports another configuration.
-`options` enables a named kernel option.
-The device entry permits an `aicwf` attachment on an applicable SD/MMC bus.
-`pseudo-device` selects a software device facility.
-The corresponding source declarations determine dependencies and compiled files.
-
-This excerpt is not a complete replacement for `EMBER64`.
-Read its current options and dependencies before deriving a configuration.
+Read the current configuration and its source declarations when choosing exact entries.
+The linked `EMBER64` source is an AArch64 entry point, not a universal configuration for every target.
 Keep kernel and loadable modules from a compatible build.
 
 ## Hardware properties and firmware
@@ -46,5 +39,5 @@ Changing the root filesystem also requires a compatible image producer and boot 
 - [DevBoards catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json)
 - [OS build guide](https://github.com/oxtech-ember/EmberBSD/blob/main/README.ember.md)
 
-Use the builder's current interface for compiler and output-directory selection.
+Use the builder's current source and help for exact compiler and output-directory options.
 A configuration that compiles still needs the relevant boot and hardware checks.

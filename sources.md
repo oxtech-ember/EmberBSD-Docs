@@ -18,16 +18,18 @@ Use these pinned revisions when comparing the guide with its original baseline.
 | Examples | [`fe58ba7dad1a`](https://github.com/oxtech-ember/EmberBSD-Examples/tree/fe58ba7dad1a98ae23b95c1bd144f75bd22880a9) | Application catalog and ownership |
 
 The guide summarizes these sources in original prose.
-Short configuration excerpts retain their owner identifiers and link to the complete source.
+Source code is also documentation; exact interfaces and configuration references remain with their implementation owners.
 Each source repository retains its own licensing and attribution.
 New guide text uses [BSD-2-Clause](LICENSE).
 
 ## Evidence limits
 
-The initial guide checks documentation, configuration names, command interfaces, and links.
+The initial guide checked documentation, configuration names, command interfaces, and links.
 It does not report a new OS build, package release, deployment, or hardware test.
 Support records and executable evidence remain with their owners.
 
-When an implementation changes, update its owner documentation and the affected explanation here.
+Conceptual explanations link to exact commands, configuration, and extension contracts at their owners.
+When an implementation changes, update its exact documentation at the owner.
+Update this guide when its conceptual explanation or source navigation changes.
 Record a new baseline for the affected owner when checking a later revision.
 Keep architecture intent, implemented behavior, and tested behavior distinguishable.

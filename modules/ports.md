@@ -18,8 +18,8 @@ The exported source catalog describes available recipes; it does not select all 
 | Native role | A package that runs on the development host |
 | Target role | A package built for the selected target ABI |
 
-A root with `@native` selects the host role.
-A root without that suffix selects the target role in the package selector.
+Package selection distinguishes tools that execute on the host from software built for the target.
+Read the [selection contract](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/docs/package-selection.md) for exact role syntax.
 The same dependency can need separate host and target artifacts.
 Common recipes and patches remain shared.
 

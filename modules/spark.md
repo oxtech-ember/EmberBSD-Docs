@@ -16,9 +16,8 @@ The base OS remains independent of Spark and its service providers.
 | Tool registry and MCP | Discover and invoke configured tools through declared interfaces |
 | Lua extensions | Installation-owned behavior and local task policy |
 
-Native interfaces retain their `asenta.*` identifiers.
-Their interface version is exposed through `asenta.core.apiVersion`.
-Protocol identifiers can retain historical names without changing the project name.
+Native adapter APIs and their version identifiers are documented with Spark's implementation.
+Those sources define the exact interface exposed to Lua extensions.
 
 ## Dependencies and configuration
 
@@ -28,11 +27,12 @@ Direct model access changes the model route; it does not remove the task-server 
 The local example and test fixture can run without that external service or a model account.
 
 JSON selects endpoints, model routing, state, and extensions.
-A configured Lua module exports `install(context)`.
+Configured Lua extensions connect to the agent's application context.
 Trusted in-process extensions run with the agent process's access.
 They are not isolated by the planned Runtime.
 
-Bluetooth is a build-time option. The cross-build option `SPARK_ENABLE_BLUETOOTH=no` excludes Bluetooth and OBD registration.
+Bluetooth and OBD adapters are optional build-time features with their own target dependencies.
+Use Spark's cross-build reference for the exact selection interface.
 MCP configuration selects installed adapters or external services; it does not add missing native hardware support.
 
 ## Current boundary and sources

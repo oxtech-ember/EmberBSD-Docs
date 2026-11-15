@@ -29,8 +29,9 @@ For installation, use the OS [Quick Start](https://github.com/oxtech-ember/Ember
 
 ## Scope and sources
 
-This repository owns the cross-project explanation and reading order.
-Detailed APIs, command references, tests, and hardware support records stay with their implementation owners.
+This repository owns conceptual explanations: purpose, boundaries, interactions, design reasons, and the meaning of configuration choices.
+Source code is also documentation. Code, comments, schemas, tests, help, and owner references describe exact implementation behavior.
+Detailed APIs, command recipes, field/default lists, and hardware support records stay with their owners.
 Each module page links to those sources. Read the [source baseline](sources.md) for the reviewed revisions.
 
 Implemented code, a successful build, and a working device scenario are separate results.

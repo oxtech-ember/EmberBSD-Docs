@@ -23,10 +23,8 @@ The optional littlefs integration demonstrates the boundary between shared libra
 Ports prepares the common upstream source. The OS VFS adapter supplies BSD metadata and vnode behavior.
 The driver handles the underlying device rather than file permissions or application policy.
 
-`file-system LITTLEFS` selects the kernel integration.
-`EMBER_LITTLEFS_SOURCE` names the source tree prepared through Ports.
-`options LITTLEFS_FLASH` additionally selects the generic NOR flash backend.
-These entries are fragments, not a complete bootable kernel configuration.
+Kernel configuration selects the integration and applicable storage backend.
+The owner's source and build contract define the exact entries and prepared-source inputs.
 
 The current contract documents unsupported hard links, NFS file handles, and public ACL/xattr operations.
 The flash backend also excludes NAND until its ECC and bad-block contract is implemented.

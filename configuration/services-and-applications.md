@@ -9,14 +9,7 @@ It is separate from kernel compilation and package selection.
 
 Use `/etc/rc.conf` for local service choices.
 Preserve its existing defaults include and board-specific settings.
-For example, the OS user guide sets these assignments:
-
-```sh
-rc_configured=YES
-hostname="ember-device"
-```
-
-Choose a distinct hostname. Update existing assignments instead of appending conflicting copies.
+The installation supplies its identity and enables the services needed for the device's task.
 Service-specific files supply settings such as network authentication or SSH policy.
 Enable a service after its prerequisites are installed and configured.
 Use the service's documented validation and reload/restart behavior.
@@ -30,32 +23,27 @@ Start from Spark's [`examples/agent.json`](https://github.com/oxtech-ember/Ember
 It is an application template, not a complete system image configuration.
 The installation supplies a compatible task server, model service, and credentials.
 
-| Choice | Fields | Effect |
-| --- | --- | --- |
-| Direct model route | `model.baseUrl`, optional `model.keyEnv`; leave `model.via` unset | Agent contacts the compatible model endpoint |
-| Task-server model route | `model.via` is `server`; omit model URL/key fields | Model access goes through the configured task server |
-| Task service | `server.baseUrl`, `server.tokenEnv` | Supplies task operations in either model route |
-| State | `--state-root`, `OXTORG_LUA_STATE_ROOT`, or `stateRoot` | Selects persistent agent state according to the owner's precedence |
-
-Keys come from the named environment variables. The JSON stores their names.
-Role files and relative paths resolve from the configuration directory.
+Direct model routing puts model access at the agent installation.
+Routing through the task server centralizes provider access there.
+Choose according to endpoint compatibility, credential placement, and service availability.
 Direct model routing still uses the task server for task execution.
+Persistent state lets the agent retain task progress across process restarts.
+Credential handling, path resolution, defaults, and precedence belong to the owner's exact configuration contract.
 
 ## Spark extensions and optional native features
 
-| Extension | Contract |
+| Extension type | Architectural choice |
 | --- | --- |
-| Configured Lua module | `config.modules` entry loads a module with `install(context)` |
-| Local Lua tool | `luaTools` loads a trusted file returning `function(args)` |
-| In-process MCP adapter | Configuration selects an installed `module` |
-| External MCP service | Configuration uses `command` or `url` |
-| Optional Bluetooth/OBD | Cross build selects `SPARK_ENABLE_BLUETOOTH`; `no` excludes their registration |
+| In-process Lua extension | Share agent state and access for trusted installation behavior |
+| In-process MCP adapter | Connect installed tool adapters inside the agent process |
+| External MCP service | Connect tools across a process or service boundary |
+| Optional native feature | Select hardware-related dependencies at build time |
 
 An in-process extension inherits the agent process's access.
 The portable agent bundle does not itself install the separate workshop Lua interpreter.
 Read the extension contract before choosing process and trust boundaries.
 
-These names are specific to Spark. They are not a universal EmberBSD plugin API.
+Spark's extension contracts belong to that application. They are not a universal EmberBSD plugin API.
 The separate [Runtime](../modules/runtime.md) still has no implemented application configuration contract.
 
 Read [Spark runtime and extensions](https://github.com/oxtech-ember/EmberBSD-Spark/blob/main/docs/runtime.md)

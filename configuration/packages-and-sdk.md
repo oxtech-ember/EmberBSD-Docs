@@ -8,68 +8,39 @@ The selected configuration supplies host identity, target ABI, prefixes, and sys
 
 ## Understand package sets
 
-Ports stores sets in `profiles/package-sets/*.txt`.
-Each non-comment line is a versionless package root.
-For example, the `sdk-c` set contains:
+A set names the package roots needed for a task.
+Recipes supply the versions and dependencies. The set does not duplicate that graph.
+Native roots select host programs; target roots select programs for the device ABI.
 
-```text
-lang/clang@native
-lang/llvm@native
-devel/lld@native
-```
+A C application development selection needs host compiler tools and a matching target sysroot.
+A desktop selection starts from session packages and includes their dependencies.
+These selections serve different tasks without requiring separate dependency recipes.
 
-These are host tools. Select the target application sysroot separately.
-The `plasma` set contains `sysutils/ember-plasma-session`.
-Its recipe declares dependencies; the set does not duplicate the graph.
-
-Inspect available sets from an SDK source checkout:
-
-```sh
-python3 scripts/packages.py --ports-root /path/to/EmberBSD-Ports list
-python3 scripts/packages.py --ports-root /path/to/EmberBSD-Ports show --set sdk-c
-```
-
-Replace the example path with your Ports checkout.
-These source-catalog operations inspect names and roots without requiring bmake or an installed SDK.
-They do not prove binary availability or perform a build.
+Read the current [package-set definitions](https://github.com/oxtech-ember/EmberBSD-Ports/tree/main/profiles/package-sets)
+for their exact contents. Use the [SDK selector](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/package-selection.md)
+for catalog inspection and planning commands.
+Catalog inspection describes available source selections; it does not establish binary availability or a completed build.
 
 ## Client configuration
 
-The SDK client's JSON schema is `emberbsd.sdk-client.v1`.
-Use the owner's complete example or the configuration created by its supported bootstrap.
-
-| Field | Purpose |
-| --- | --- |
-| `host_prefix` | Native tools and packages |
-| `repositories` | Exact host/target identities and installation destinations |
-| `cache_dir` | Shared package archive cache |
-| `state_dir` | Client state |
-| `url` | Signed package-channel location |
-| `source` | Optional Ports checkout, exported pkgsrc, make configuration, and persistent source-build state |
-
-The JSON is installation configuration; it does not define new package versions.
+Client configuration connects package selection to a concrete installation.
+It identifies host and target environments, installation destinations, shared storage, and a package channel.
+Optional source-build inputs connect missing binaries to the existing Ports producer.
+These settings describe where and how to obtain components; they do not define new package versions.
 Platform identity must match the selected catalog and execution host where required.
 HTTPS trust and package-signing trust serve different purposes.
-
-With an existing valid client configuration, inspect the selection before installation:
-
-```sh
-python3 scripts/packages.py --config /path/to/client.json plan --set sdk-c --target aarch64
-```
-
-This example requires a compatible configured catalog and target artifact.
-It can access the network and client cache. It does not install the selection.
-Use the owner's documented `install` command when that plan matches the intended setup.
+Use the owner's configuration template and reference for exact fields, defaults, and validation.
+Planning lets the user inspect a selection before installation changes its destination.
 
 ## Source builds and installed updates
 
-Explicit source `plan` and `build` use `BMAKE`, `MAKECONF`, `PKGSRCDIR`, `--host-prefix`, and persistent `--state`.
-The source graph installs into the selected build prefix/sysroot, not a board.
+Explicit source builds combine selected package roots with host tools, target inputs, and persistent build state.
+Their installation destination is the selected build prefix or sysroot, not a board.
 The native prefix supplies build tools; the target sysroot supplies target headers and libraries.
 
-The client distinguishes adding roots with `install` from updating actual installed roots with `update`.
+Adding application roots and updating installed components are different user intentions.
 Removing a root from a later selection does not automatically remove an installed package.
-An empty selection does no work.
+The client's source and reference define the exact operations and safeguards for each intention.
 
 ## Read the complete contracts
 

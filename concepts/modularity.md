@@ -12,7 +12,7 @@ These units need not have the same boundaries.
 
 | Selection point | What it controls | Example |
 | --- | --- | --- |
-| Kernel build | Compiled subsystems, filesystems, and device attachments | `options`, `file-system`, and device entries in kernel configuration |
+| Kernel build | Compiled subsystems, filesystems, and device attachments | A kernel configuration selects the required OS facilities |
 | Hardware discovery | Attachment to actual devices and their resources | ACPI/FDT descriptions and bus matching |
 | Package selection | Installed application roots and their dependencies | Versionless Ports package sets |
 | Service startup | Which installed services run | `/etc/rc.conf` |
