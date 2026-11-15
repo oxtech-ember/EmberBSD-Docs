@@ -25,10 +25,14 @@ New guide text uses [BSD-2-Clause](LICENSE).
 ## Wi-Fi review
 
 The [Wi-Fi chapter](modules/wifi.md) was checked on 2026-11-15 against EmberBSD
-[`4460bde0ec74`](https://github.com/oxtech-ember/EmberBSD/tree/4460bde0ec74f5479fca38dc3b1a44172b2a63a6).
+[`f49cf0668349`](https://github.com/oxtech-ember/EmberBSD/tree/f49cf06683492c867e36c6d1e29ff763a4efc609).
 The review covers net80211 headers, native frame/association/security paths, station-management and aggregation contracts,
-the BSD supplicant backend, native rtw88 integration, and bwfm/aicwf firmware adapters.
-It distinguishes implemented protocol mechanisms from optional provider integration.
+the BSD supplicant backend/build profiles, native rtw88 integration, and bwfm/aicwf firmware adapters.
+The follow-up checked the experimental iwx key replacement, firmware TX counter initialization,
+PMF/queue policy and restricted HE/EHT paths. It distinguishes implemented mechanisms,
+the approved TX-offload direction and proposed common extensions.
+Pinned Linux iwlmld sources, mac80211/cfg80211 documentation and FreeBSD net80211 crypto inform
+the design; their behavior is not evidence of EmberBSD hardware support.
 Hardware applicability and physical acceptance remain in DevBoards; no hardware results are copied here.
 
 ## Graphics and compute review
