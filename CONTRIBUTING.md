@@ -1,0 +1,36 @@
+# Contribute to the developer guide
+
+This repository explains EmberBSD across implementation owners.
+Write for a developer who needs the concept before reading source code.
+
+## Choose the document
+
+Use `concepts/` for architecture and modularity, `modules/` for component explanations,
+`configuration/` for selection boundaries, and `development/` for navigation and terminology.
+Keep detailed software contracts, command references, and tests beside their implementation.
+Keep hardware support and wiring records in DevBoards.
+
+## Prepare a change
+
+Check the current published owner sources before changing a technical claim.
+Use short English sentences and explicit component names.
+Label proposed interfaces and meaningful implementation limits.
+Link to the canonical contract instead of copying a long command recipe or support matrix.
+Identify the source revision in [sources.md](sources.md) when updating its review baseline.
+Preserve attribution and licenses for adapted material.
+
+## Check and submit
+
+Check relative links, heading anchors, external source paths, tables, and code fences.
+Check command options and configuration fields against the actual parser or source.
+Use example paths and keep credentials and private installation details outside the guide.
+Review Mermaid diagrams in a renderer that supports them.
+Run `git diff --check` and inspect the complete proposed diff.
+
+Submit a pull request with the problem, changed pages, reviewed sources, and checks performed.
+Disclose AI assistance when used.
+An independent reviewer checks the explanation, ownership, sources, and scope of claims.
+Documentation-only changes require no OS build unless they also change build inputs or behavior.
+
+New guide material uses [BSD-2-Clause](LICENSE).
+Existing owner documents and imported excerpts keep their original licenses and attribution.
