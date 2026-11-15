@@ -12,7 +12,7 @@ Subsystem pages explain architecture. Their linked owner documents define the de
 | [Storage](storage.md) | VFS, filesystem adapters, media access, and image construction | EmberBSD; shared library sources in Ports |
 | [Networking](networking.md) | Network protocols, interfaces, radio integration, and network services | EmberBSD; optional packages in Ports |
 | [Wi-Fi](wifi.md) | Native and firmware MAC boundaries, station security, protocol limits, and driver integration | EmberBSD; hardware applicability in DevBoards |
-| [Graphics and compute](graphics-and-compute.md) | Display, rendering, accelerator interfaces, and application stacks | EmberBSD, Ports, and applications |
+| [Graphics and compute](graphics-and-compute.md) | DRM/KMS, Mesa/Vulkan, buffer sharing, UI acceleration, and driver integration | EmberBSD, Ports, and applications; hardware applicability in DevBoards |
 | [Ports](ports.md) | Shared recipes, patches, package roots, and dependency graph | EmberBSD-Ports |
 | [SDK](sdk.md) | Host tools, cross builds, sysroots, packages, and release composition | EmberBSD-SDK |
 | [Spark](spark.md) | Optional task agent, model access, MCP, and Lua extensions | EmberBSD-Spark |

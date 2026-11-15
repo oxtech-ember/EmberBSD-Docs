@@ -37,6 +37,10 @@ Keep general protocol/state logic with the subsystem, then attach hardware callb
 Update affected consumers and configuration when the interface changes.
 Keep detailed API and resource-lifetime documentation beside the implementation.
 
+For a GPU, display adapter, or accelerator, start with the [graphics architecture](../modules/graphics-and-compute.md)
+and the [kernel/userspace interface map](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/external/bsd/drm2/drm/docs/README.md).
+Choose the render, display, or compute result before selecting the required components.
+
 ## Understand the evidence
 
 | Check | What it establishes |

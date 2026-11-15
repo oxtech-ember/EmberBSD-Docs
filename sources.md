@@ -31,6 +31,19 @@ the BSD supplicant backend, native rtw88 integration, and bwfm/aicwf firmware ad
 It distinguishes implemented protocol mechanisms from optional provider integration.
 Hardware applicability and physical acceptance remain in DevBoards; no hardware results are copied here.
 
+## Graphics and compute review
+
+The [graphics and compute chapter](modules/graphics-and-compute.md) was checked on 2026-11-15 against:
+
+| Owner | Reviewed revision | Material used |
+| --- | --- | --- |
+| EmberBSD | [`8ae54fdfcf56`](https://github.com/oxtech-ember/EmberBSD/tree/8ae54fdfcf56eed96c4466b7d1fec12bc452e0c8) | DRM device/GEM/KMS interfaces; native identity, submission, syncobj, DMA-BUF, import/mmap and hotplug contracts; V3D, PowerVR, display, VirtGPU and NPU integration boundaries |
+| Ports | [`865fa793bbe6`](https://github.com/oxtech-ember/EmberBSD-Ports/tree/865fa793bbe677d705ba40e304a948ee99a15f83) | Shared Mesa recipe/options, libdrm and Vulkan loader ownership, native generators, device/input integration, Qt bsdfb offscreen presentation, and UI measurement |
+
+The review separates API availability, backend selection, buffer sharing, hardware execution, and presentation.
+Upstream Mesa and Khronos references explain API semantics, not EmberBSD device acceptance.
+Hardware support records remain in DevBoards; no new GPU execution or conformance result is claimed.
+
 ## Evidence limits
 
 The initial guide checked documentation, configuration names, command interfaces, and links.
