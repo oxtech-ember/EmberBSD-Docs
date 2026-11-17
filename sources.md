@@ -30,7 +30,8 @@ The review covers net80211 headers, native frame/association/security paths, sta
 the BSD supplicant backend/build profiles, native rtw88 integration, and bwfm/aicwf firmware adapters.
 The follow-up checked the experimental iwx key replacement, firmware TX counter initialization,
 PMF/queue policy and restricted HE/EHT paths. It distinguishes implemented mechanisms,
-the approved TX-offload direction and proposed common extensions.
+the TX-offload design and proposed common extensions.
+The November 17 update checked pairwise TX ownership against the [implemented native SAE provider contract](https://github.com/oxtech-ember/EmberBSD/blob/674ecb28d6d5/sys/net80211/docs/sae.md#firmware-tx-providers).
 Pinned Linux iwlmld sources, mac80211/cfg80211 documentation and FreeBSD net80211 crypto inform
 the design; their behavior is not evidence of EmberBSD hardware support.
 Hardware applicability and physical acceptance remain in DevBoards; no hardware results are copied here.
