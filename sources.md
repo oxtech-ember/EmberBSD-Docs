@@ -32,6 +32,10 @@ The follow-up checked the experimental iwx key replacement, firmware TX counter 
 PMF/queue policy and restricted HE/EHT paths. It distinguishes implemented mechanisms,
 the TX-offload design and proposed common extensions.
 The November 17 update checked pairwise TX ownership against the [implemented native SAE provider contract](https://github.com/oxtech-ember/EmberBSD/blob/674ecb28d6d5/sys/net80211/docs/sae.md#firmware-tx-providers).
+The same review traced Neighbor Report and radio measurement capabilities from each adapter
+through [the station management ABI](https://github.com/oxtech-ember/EmberBSD/blob/651775f834f5173d07cb520c24f20551960b44d1/sys/net80211/docs/station-management.md)
+and checked how [the shared supplicant](https://github.com/oxtech-ember/EmberBSD-Ports/tree/b5f7e27d2465b9cfe2e4335712a9c2346734a6e4/pkgsrc/net/wpa_supplicant)
+uses the local send result and the peer ACK indication when answering a BSS Transition Management Request.
 Pinned Linux iwlmld sources, mac80211/cfg80211 documentation and FreeBSD net80211 crypto inform
 the design; their behavior is not evidence of EmberBSD hardware support.
 Hardware applicability and physical acceptance remain in DevBoards; no hardware results are copied here.
