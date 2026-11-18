@@ -77,11 +77,12 @@ A fix to SAE key or controlled-port handling therefore reaches both builds.
 4. **Install keys and authorize data.** The EAPOL handshake installs keys. The controlled port admits ordinary data only after the security path is ready. Association alone is insufficient.
 5. **Run, rekey, or leave.** Check asynchronous events against their connection and operation identities. Retire the old session before reset or replacement; drain queues before freeing their owner.
 
-ESP and Intel iwx report beacons and probe responses with the receive channel and
-signal strength. The [net80211 scan input](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net80211/docs/net80211-beacon-ies.md#raw-scan-observations)
-validates each report and updates the scan cache. This lets a station discover a
-neighbor on another channel while retaining its home channel and association.
-The adapter owns the firmware scan lifetime and identifies which reports belong to it.
+ESP and Intel iwx feed received beacons and probe responses to the common scan cache.
+net80211 checks the advertised primary channel against the receive channel. A valid result
+from a neighboring AP can update the cache while the station stays associated.
+In iwx, beacons from the current AP on its home channel still reach the native management
+path so the station can act on a channel switch. The adapter owns firmware scan completion.
+[Scan input contract](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net80211/docs/net80211-beacon-ies.md#raw-scan-observations)
 
 Three identities solve different problems: association identity selects a BSS lifetime; key generation identifies a security lifetime;
 an operation cookie identifies one asynchronous request. Reconnecting to the same BSSID does not revive old work.
@@ -102,10 +103,14 @@ choose a candidate or decline the suggestion. It returns that decision to the AP
 | net80211 ↔ BSD supplicant backend | Capabilities, received Action bodies, and send results associated with the current connection. A late completion from the previous association cannot complete a new request, even on the same AP. |
 | Supplicant ↔ AP | Association capabilities and protocol messages. The host advertises operations it can actually serve; the supplicant interprets the candidate list and decides whether to move. |
 
-A transmit operation has two independent results: whether the local transport succeeded,
-and whether the peer acknowledged the frame at the MAC layer. Some radios supply no ACK
-information. Local completion on such a radio leaves delivery unknown. Even a confirmed MAC
-ACK does not say whether the AP or station accepted a transition.
+Connected scanning, Neighbor Reports, measurement transport and BTM each have their own
+capability. For example, the ESP driver transports Neighbor Report and BTM actions. Its FullMAC
+adapter carries the host's roaming capabilities into the association request so the AP
+sees the operations the supplicant can serve. [ESP association and Action transport](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/arch/riscv/espressif/README.wifi.md)
+
+When the supplicant accepts a BTM request, an asynchronous local send error or a known
+missing MAC acknowledgement cancels the pending move. Some radios only report local
+completion. With peer acknowledgement unknown, the supplicant may proceed to the target. [BSD supplicant TX status and checks](https://github.com/oxtech-ember/EmberBSD-Ports/tree/main/pkgsrc/net/wpa_supplicant/tests)
 
 For an AP-initiated test, correlate the incoming Request and outgoing Response by dialog token
 and check the response status on the AP. A refusal demonstrates a working exchange.
@@ -117,17 +122,25 @@ and [shared supplicant recipe](https://github.com/oxtech-ember/EmberBSD-Ports/tr
 
 ## Who owns transmit encryption
 
-For native SAE, net80211 selects the owner of pairwise transmit encryption when it installs
-a fresh key. Software normally owns encryption and the transmit packet number.
-Providers implementing the TX contract can hand both to firmware. The experimental BE200
-path in `iwx` implements the interface; its firmware TX profile still needs radio acceptance.
-The same owner then protects data and robust unicast management frames that use that key.
-Changing a group key preserves the pairwise key and its packet number. If firmware loses
-counter state on reset, the connection must establish a fresh key before traffic resumes.
+For native SAE, the same owner encrypts pairwise data and robust unicast management
+frames and allocates their transmit packet numbers (PNs) for the life of the pairwise
+key (PTK). net80211 retains key lifetime, receive replay checks and controlled-port
+authorization. A group-key change (GTK or IGTK) leaves the installed PTK and its PN
+intact. When firmware owns TX, a failed key replacement or loss of the counter on
+reset closes the port. Traffic resumes with a fresh PTK. [Native SAE provider contract](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net80211/docs/sae.md#firmware-tx-providers)
 
-The [firmware TX provider contract](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net80211/docs/sae.md#firmware-tx-providers)
-describes the implemented interface and the separate prerequisites for protected aggregation.
-Availability of this interface does not establish radio acceptance for a particular adapter.
+The experimental BE200 driver selects its profile at interface start. Software TX is
+the default. One opt-in profile gives pairwise TX to firmware and keeps the non-QoS
+queue. A second also allows TX aggregation once the PTK is installed and the port is
+open. Firmware then originates the BlockAck actions and must protect them under PMF.
+The driver removes aggregation queues before removing their pairwise key.
+[iwx profiles and queue lifetime](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/development/iwx-be200/README.md#management-and-aggregation)
+
+Both firmware profiles await radio acceptance. Check PN continuity across a group rekey
+and a fresh PTK after reset in each profile. With aggregation enabled, also check that
+the station protects its ADDBA and DELBA actions on air. Then measure throughput in
+both directions.
+[BE200 acceptance criteria](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/development/iwx-be200/README.md#software-verification-and-bench-remainder)
 
 ## Standards: what the software provides
 

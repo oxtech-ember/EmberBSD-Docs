@@ -24,24 +24,17 @@ New guide text uses [BSD-2-Clause](LICENSE).
 
 ## Wi-Fi review
 
-The [Wi-Fi chapter](modules/wifi.md) was checked on 2026-11-15 against EmberBSD
-[`f49cf0668349`](https://github.com/oxtech-ember/EmberBSD/tree/f49cf06683492c867e36c6d1e29ff763a4efc609).
-The review covers net80211 headers, native frame/association/security paths, station-management and aggregation contracts,
-the BSD supplicant backend/build profiles, native rtw88 integration, and bwfm/aicwf firmware adapters.
-The follow-up checked the experimental iwx key replacement, firmware TX counter initialization,
-PMF/queue policy and restricted HE/EHT paths. It distinguishes implemented mechanisms,
-the TX-offload design and proposed common extensions.
-The November 17 update checked pairwise TX ownership against the [implemented native SAE provider contract](https://github.com/oxtech-ember/EmberBSD/blob/674ecb28d6d5/sys/net80211/docs/sae.md#firmware-tx-providers).
-The same review traced Neighbor Report and radio measurement capabilities from each adapter
-through [the station management ABI](https://github.com/oxtech-ember/EmberBSD/blob/651775f834f5173d07cb520c24f20551960b44d1/sys/net80211/docs/station-management.md)
-and checked how [the shared supplicant](https://github.com/oxtech-ember/EmberBSD-Ports/tree/b5f7e27d2465b9cfe2e4335712a9c2346734a6e4/pkgsrc/net/wpa_supplicant)
-uses the local send result and the peer ACK indication when answering a BSS Transition Management Request.
-The November 18 review verified the [shared Ports BSD backend and package configuration](https://github.com/oxtech-ember/EmberBSD-Ports/tree/cc78830db2d9345589074f8e966b1cb4e384a500/pkgsrc/net/wpa_supplicant),
-[base source selection](https://github.com/oxtech-ember/EmberBSD/tree/e88793077a26a351d4a34f54064bfa79f7836b44/external/bsd/wpa)
-and the [ESP and iwx scan input contract](https://github.com/oxtech-ember/EmberBSD/blob/832da73b953f2919996f5d2f8c23f67a7183a383/sys/net80211/docs/net80211-beacon-ies.md#raw-scan-observations).
-Pinned Linux iwlmld sources, mac80211/cfg80211 documentation and FreeBSD net80211 crypto inform
-the design; their behavior is not evidence of EmberBSD hardware support.
-Hardware applicability and physical acceptance remain in DevBoards; no hardware results are copied here.
+The [Wi-Fi chapter](modules/wifi.md) was reviewed on 2026-11-18.
+
+| Owner | Reviewed sources | Scope |
+| --- | --- | --- |
+| EmberBSD | [net80211](https://github.com/oxtech-ember/EmberBSD/tree/139d373fe22caf2781f34b23a1b92be096ffd959/sys/net80211), [experimental iwx](https://github.com/oxtech-ember/EmberBSD/tree/139d373fe22caf2781f34b23a1b92be096ffd959/ember/development/iwx-be200) | Native association, scan input, HT/VHT, iwx HE/EHT limits, SAE key ownership, aggregation and recovery |
+| EmberBSD | [ESP](https://github.com/oxtech-ember/EmberBSD/tree/139d373fe22caf2781f34b23a1b92be096ffd959/sys/arch/riscv/espressif), [bwfm](https://github.com/oxtech-ember/EmberBSD/blob/139d373fe22caf2781f34b23a1b92be096ffd959/sys/dev/ic/bwfm.c), [aicwf](https://github.com/oxtech-ember/EmberBSD/blob/139d373fe22caf2781f34b23a1b92be096ffd959/sys/dev/sdmmc/if_aicwf.c) | FullMAC station capabilities, Action transport and connected scans |
+| Ports and base | [Ports WPA recipe and checks](https://github.com/oxtech-ember/EmberBSD-Ports/tree/7f56946263c59f55a67b5aa1d379c4beba956376/pkgsrc/net/wpa_supplicant), [base build](https://github.com/oxtech-ember/EmberBSD/tree/139d373fe22caf2781f34b23a1b92be096ffd959/external/bsd/wpa) | Shared BSD backend, build profiles and BTM response handling |
+
+For physical results, use the [DevBoards hardware profiles](https://github.com/oxtech-ember/EmberBSD-DevBoards/tree/main/boards).
+The [iwx bench criteria](https://github.com/oxtech-ember/EmberBSD/blob/139d373fe22caf2781f34b23a1b92be096ffd959/ember/development/iwx-be200/README.md#software-verification-and-bench-remainder)
+identify the radio checks still open for BE200 firmware TX.
 
 ## Graphics and compute review
 
