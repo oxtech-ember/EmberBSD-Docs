@@ -65,6 +65,10 @@ That does not authorize the host to reconstruct missing key or session identity 
 The [offload receiver contract](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net80211/docs/net80211-rxba.md#firmware-offload-receiver)
 defines that boundary.
 
+The base system and the packaged supplicant use the same BSD backend from
+the [Ports WPA recipe](https://github.com/oxtech-ember/EmberBSD-Ports/tree/main/pkgsrc/net/wpa_supplicant).
+A fix to SAE key or controlled-port handling therefore reaches both builds.
+
 ## A connection from scan to stop
 
 1. **Discover.** Collect beacon/probe information elements (IEs). An AP advertising HT, VHT, or SAE is a candidate, not an enabled local capability.
@@ -72,6 +76,12 @@ defines that boundary.
 3. **Associate.** The native stack or firmware negotiates with the AP. Only a matching result can enable the negotiated features.
 4. **Install keys and authorize data.** The EAPOL handshake installs keys. The controlled port admits ordinary data only after the security path is ready. Association alone is insufficient.
 5. **Run, rekey, or leave.** Check asynchronous events against their connection and operation identities. Retire the old session before reset or replacement; drain queues before freeing their owner.
+
+ESP and Intel iwx report beacons and probe responses with the receive channel and
+signal strength. The [net80211 scan input](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net80211/docs/net80211-beacon-ies.md#raw-scan-observations)
+validates each report and updates the scan cache. This lets a station discover a
+neighbor on another channel while retaining its home channel and association.
+The adapter owns the firmware scan lifetime and identifies which reports belong to it.
 
 Three identities solve different problems: association identity selects a BSS lifetime; key generation identifies a security lifetime;
 an operation cookie identifies one asynchronous request. Reconnecting to the same BSSID does not revive old work.
@@ -139,7 +149,7 @@ An adapter must supply the missing hardware operations before it advertises a fe
 | 802.11ax / HE | No shared native HE negotiation/provider contract. Experimental `iwx` has opt-in 5 GHz HE up to 160 MHz, with firmware trigger/sounding responsibilities. MU EDCA, TWT, spatial reuse and larger BA windows are not integrated there. | [Common admission](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net80211/ieee80211_ht20.c), [iwx negotiation](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/development/iwx-be200/src/if_iwx_ht.h), [integration limits](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/development/iwx-be200/README.md) |
 | 802.11be / EHT | No shared native EHT contract. Experimental `iwx` has opt-in single-link 5 GHz EHT at 80/160 MHz. MLO, puncturing, 320 MHz and 6 GHz are absent from that path. | [EHT admission and limits](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/development/iwx-be200/src/if_iwx_ht.h) |
 | 6 GHz / Wi-Fi 6E | No integrated native 6 GHz channel, discovery and association path in the reviewed stack. Firmware channel entries alone are insufficient. HE on 5 GHz does not establish 6 GHz support. | [Channel model](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net80211/_ieee80211.h), [iwx integration](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/development/iwx-be200/src/if_iwx.c) |
-| OWE, FT-SAE and WPA3-Enterprise suites | No end-to-end profile in the reviewed native SAE contract and BSD supplicant integration. The full supplicant build includes EAP methods; this does not establish these additional AKMs or PMF/cipher combinations. | [Selected RSN profile](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net80211/ieee80211_rsn.h), [BSD backend](https://github.com/oxtech-ember/EmberBSD/blob/main/external/bsd/wpa/dist/src/drivers/driver_bsd.c), [build profiles](https://github.com/oxtech-ember/EmberBSD/blob/main/external/bsd/wpa/bin/wpa_supplicant/Makefile) |
+| OWE, FT-SAE and WPA3-Enterprise suites | No end-to-end profile in the reviewed native SAE contract and BSD supplicant integration. The full supplicant build includes EAP methods; this does not establish these additional AKMs or PMF/cipher combinations. | [Selected RSN profile](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net80211/ieee80211_rsn.h), [BSD backend](https://github.com/oxtech-ember/EmberBSD-Ports/tree/main/pkgsrc/net/wpa_supplicant), [build profiles](https://github.com/oxtech-ember/EmberBSD/blob/main/external/bsd/wpa/bin/wpa_supplicant/Makefile) |
 
 Native HT/VHT has deliberate standards deviations in
 [mixed-mode protection](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net80211/docs/net80211-vht-ies.md#deviation-ht-protection-mode-3)

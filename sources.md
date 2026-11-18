@@ -36,6 +36,9 @@ The same review traced Neighbor Report and radio measurement capabilities from e
 through [the station management ABI](https://github.com/oxtech-ember/EmberBSD/blob/651775f834f5173d07cb520c24f20551960b44d1/sys/net80211/docs/station-management.md)
 and checked how [the shared supplicant](https://github.com/oxtech-ember/EmberBSD-Ports/tree/b5f7e27d2465b9cfe2e4335712a9c2346734a6e4/pkgsrc/net/wpa_supplicant)
 uses the local send result and the peer ACK indication when answering a BSS Transition Management Request.
+The November 18 review verified the [shared Ports BSD backend and package configuration](https://github.com/oxtech-ember/EmberBSD-Ports/tree/cc78830db2d9345589074f8e966b1cb4e384a500/pkgsrc/net/wpa_supplicant),
+[base source selection](https://github.com/oxtech-ember/EmberBSD/tree/e88793077a26a351d4a34f54064bfa79f7836b44/external/bsd/wpa)
+and the [ESP and iwx scan input contract](https://github.com/oxtech-ember/EmberBSD/blob/832da73b953f2919996f5d2f8c23f67a7183a383/sys/net80211/docs/net80211-beacon-ies.md#raw-scan-observations).
 Pinned Linux iwlmld sources, mac80211/cfg80211 documentation and FreeBSD net80211 crypto inform
 the design; their behavior is not evidence of EmberBSD hardware support.
 Hardware applicability and physical acceptance remain in DevBoards; no hardware results are copied here.
