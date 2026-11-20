@@ -1,10 +1,23 @@
-# Planned application Runtime
+# Application Runtime
 
 [Modules](README.md) · [Spark](spark.md)
 
-**Design stage.** The Runtime repository currently describes its purpose and boundaries.
-It provides no executable Runtime, installer, stable Device API, or validated Wasm environment.
-There is no Runtime installation command to configure today.
+The first optional Runtime component renders small compiled QML scenes.
+Application installation, lifecycle management, permission enforcement and a
+stable device-wide API remain design work.
+
+## Embedded QML renderer
+
+On the developer machine, the SDK compiles a defined subset of QML into C
+scene data. The target application owns its model values and event loop. It
+passes those values to a portable renderer which produces RGB565 scanlines.
+A separate wsdisplay backend presents them through the OS framebuffer ABI.
+Developers can use this path independently of a desktop or Qt installation
+on the device. The weather example changes an integer binding at run time.
+
+- [Compiler and supported QML constructs](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/qml.md)
+- [Runtime renderer and display contract](https://github.com/oxtech-ember/EmberBSD-Runtime/tree/main/qml)
+- [Weather application and RV32 build comparison](https://github.com/oxtech-ember/EmberBSD-Examples/tree/main/desktop/mosaico-weather)
 
 ## Intended responsibility
 
@@ -13,8 +26,8 @@ The planned application SDK defines developer-facing interfaces and compatibilit
 The OS continues to own drivers and hardware support.
 Ports continues to own shared external dependencies.
 
-These are proposed responsibilities, not available APIs.
-An implementation needs explicit contracts and a reproducible consumer that exercises them.
+The proposed lifecycle and permission services still need defined contracts
+and reproducible applications that exercise them.
 Optional profiles are intended to let small devices select the operations they need.
 
 ## Develop with current interfaces

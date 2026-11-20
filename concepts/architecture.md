@@ -40,7 +40,7 @@ flowchart TB
 
 The arrows show dependencies and delivery, not a required call path for every operation.
 An application can call an OS interface directly.
-The planned Runtime is absent from this diagram because current applications do not depend on its implementation.
+Small graphical applications can additionally link the optional [Runtime QML renderer](../modules/runtime.md). Application lifecycle management remains a separate design.
 
 ## The system's main boundaries
 

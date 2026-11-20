@@ -35,7 +35,8 @@ Signing and publication are maintainer operations, separate from ordinary packag
 ## Current boundary
 
 Host SDK tools exist. Supported host operations differ; consult the host-platform contract.
-The planned stable application API, application package contract, and device Runtime remain distinct work.
+The optional QML compiler emits C scene data for the [embedded renderer](runtime.md).
+The stable general-purpose application API and application package contract remain design work.
 The name SDK therefore does not imply an implemented universal device API.
 
 ## Read the owner

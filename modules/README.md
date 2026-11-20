@@ -21,7 +21,7 @@ Subsystem pages explain architecture. Their linked owner documents define the de
 | [Ports](ports.md) | Shared recipes, patches, package roots, and dependency graph | EmberBSD-Ports |
 | [SDK](sdk.md) | Host tools, cross builds, sysroots, packages, and release composition | EmberBSD-SDK |
 | [Spark](spark.md) | Optional task agent, model access, MCP, and Lua extensions | EmberBSD-Spark |
-| [Runtime](runtime.md) | Planned application lifecycle, permissions, and shared device operations | EmberBSD-Runtime |
+| [Runtime](runtime.md) | Embedded QML renderer; planned application lifecycle, permissions and shared device operations | EmberBSD-Runtime |
 
 [Examples](https://github.com/oxtech-ember/EmberBSD-Examples) supplies complete application scenarios with explicit prerequisites and checks.
 [Developer skills](https://github.com/oxtech-ember/Ember-Agent-Skills) and
