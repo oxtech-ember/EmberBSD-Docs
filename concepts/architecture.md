@@ -5,7 +5,7 @@
 EmberBSD combines a BSD operating system with optional software for a device's task.
 A device can run a console application, a graphical interface, or an agent.
 The base OS supplies processes, memory, files, networking, permissions, and hardware access.
-It does not require Spark, an AI provider, a desktop, or the planned Runtime.
+Spark, AI providers, desktop sessions and the [embedded QML renderer](../modules/runtime.md) are optional.
 
 ## Two execution environments
 

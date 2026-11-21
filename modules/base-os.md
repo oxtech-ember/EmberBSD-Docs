@@ -13,7 +13,7 @@ Kernel subsystems use internal OS interfaces with explicit locking and resource 
 The kernel, headers, libc, startup objects, and selected runtime must form a compatible target set.
 Host libraries belong to native tools, not target application links.
 
-The base can operate without a desktop, Spark, or the planned Runtime.
+Desktop sessions, Spark and the [embedded QML renderer](runtime.md) are optional consumers of the base OS.
 A bootable composition still needs the selected architecture, boot path, drivers, and root filesystem.
 Small-memory targets can have narrower supported configurations.
 

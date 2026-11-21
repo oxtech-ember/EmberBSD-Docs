@@ -14,6 +14,7 @@ Use this page to find the development path; use the receiving repository's curre
 | Board facts, wiring, loader applicability, or support evidence | [DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/CONTRIBUTING.md) |
 | Shared dependency, compiler recipe, or portability patch | [Ports](https://github.com/oxtech-ember/EmberBSD-Ports) |
 | Host orchestration, sysroot, package client, or release tool | [SDK](https://github.com/oxtech-ember/EmberBSD-SDK) |
+| Embedded QML rendering, input handling or display integration | [Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime/tree/main/qml) |
 | Standalone application or demonstration | Its repository or [Examples](https://github.com/oxtech-ember/EmberBSD-Examples) |
 | Task agent, model adapter, or agent-local tool | [Spark](https://github.com/oxtech-ember/EmberBSD-Spark/blob/main/CONTRIBUTING.md) |
 | Assistant scenario instructions | [Developer skills](https://github.com/oxtech-ember/Ember-Agent-Skills) or [user skills](https://github.com/oxtech-ember/EmberBSD-User-Skills) |
@@ -35,14 +36,31 @@ defines its source-directory boundaries.
 
 ## A first application change
 
-Select an example close to the intended workload.
-Read its prerequisites, target, build inputs, and checks.
-Obtain the required native tools and target dependencies through SDK/Ports.
-Build against the matching target sysroot, then run the example on its declared execution platform.
-Extend one behavior and check the result through the application's interface.
+Start with the program that should run on the device. The SDK prepares the
+native build tools and a sysroot for the chosen target. Ports supplies the
+recipes for the compiler, tools and package dependencies. The OS supplies
+the target's system headers, startup objects and libc. A generator runs on
+the development host; the cross-compiler links its output against the target
+sysroot. Only the resulting program and its runtime dependencies need to go
+into the device image. [SDK and toolchain](../modules/sdk.md) ·
+[Package selection](../configuration/packages-and-sdk.md)
 
-Application development can use current OS/library interfaces without waiting for the planned Runtime.
-A hardware-independent fixture is useful for logic; device access still needs the appropriate target check.
+Choose the application layer to suit the interface:
+
+- A console command or background service can call BSD interfaces directly
+  and link the libraries it needs.
+- For a small display with a bounded set of screens and touch interactions,
+  [EmberBSD QML](../modules/runtime.md) lets the author describe a scene in QML
+  and compile it into the application. The board runs the renderer and the
+  application's event loop.
+- An application that uses Qt Quick controls, imports or other features beyond
+  the embedded subset needs Qt Quick and its target dependencies. The
+  [weather example](https://github.com/oxtech-ember/EmberBSD-Examples/tree/main/desktop/mosaico-weather)
+  illustrates both approaches and a third option for compact displays, LVGL with widgets defined in C.
+
+Choose an [example](https://github.com/oxtech-ember/EmberBSD-Examples) with
+similar inputs and outputs. Check application logic on the host, then exercise
+the device interfaces and resource use on the intended hardware.
 
 ## A subsystem or driver change
 

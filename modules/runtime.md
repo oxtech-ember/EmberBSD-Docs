@@ -8,16 +8,23 @@ stable device-wide API remain design work.
 
 ## Embedded QML renderer
 
-On the developer machine, the SDK compiles a defined subset of QML into C
-scene data. The target application owns its model values and event loop. It
-passes those values to a portable renderer which produces RGB565 scanlines.
-A separate wsdisplay backend presents them through the OS framebuffer ABI.
-Developers can use this path independently of a desktop or Qt installation
-on the device. The weather example changes an integer binding at run time.
+EmberBSD QML is an embedded subset of the QML used by Qt Quick. The host
+SDK compiler translates a supported scene and its input handlers to C. The
+application links the generated code with EmberBSD Runtime. This path suits
+a device that needs a small standalone UI without installing Qt on the target.
+
+The application owns the event loop. On a touch device, a wscons adapter
+reads pointer events from wsmouse. The Runtime applies them to the scene,
+advances animations on timed updates and identifies the region to redraw.
+The renderer produces RGB565 pixels and the wsdisplay backend writes them
+to the framebuffer. The kernel display driver delivers those pixels to the
+panel. A native Qt Quick reference can check layout and interaction on the
+host; a device run checks the actual display and input path.
 
 - [Compiler and supported QML constructs](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/qml.md)
 - [Runtime renderer and display contract](https://github.com/oxtech-ember/EmberBSD-Runtime/tree/main/qml)
 - [Weather application and RV32 build comparison](https://github.com/oxtech-ember/EmberBSD-Examples/tree/main/desktop/mosaico-weather)
+- [Qt reference tests and interactive device examples](https://github.com/oxtech-ember/EmberBSD-Examples/tree/main/desktop/qml-qt-tests)
 
 ## Intended responsibility
 

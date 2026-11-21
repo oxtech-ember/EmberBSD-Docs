@@ -5,6 +5,8 @@
 Configuration chooses a composition at several independent layers.
 Start with the device's task, target ABI, hardware, and resource constraints.
 Then select the controls owned by each layer.
+For worked choices from flash storage to desktop packages, read
+[Choosing components for a system image](system-profiles.md).
 
 | Layer | What you select | Where it lives | When it takes effect |
 | --- | --- | --- | --- |
