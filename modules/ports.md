@@ -21,6 +21,18 @@ The exported source catalog describes available recipes; it does not select all 
 Package selection distinguishes tools that execute on the host from software built for the target.
 Read the [selection contract](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/docs/package-selection.md) for exact role syntax.
 The same dependency can need separate host and target artifacts.
+
+The provider recipe fixes what goes into a release. Each consumer specifies which
+versions it can use. For example, an application linked to a shared library may
+accept a fixed implementation under the same ABI. An executable containing a
+static copy needs a new link to receive the fix. A change to an inline function
+in a header can require recompiling the files that included it. A package using
+a private interface can require an exact provider revision.
+
+The graph retains the evaluated requirement on each consumer's dependency edge.
+This lets two consumers of the same library express different constraints. Build
+planning also needs to know which headers, tools and libraries contributed to an
+artifact before it can skip work safely. [Ports update planning](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/docs/update-ports.md)
 Common recipes and patches remain shared.
 
 ## Relationship to SDK and OS
