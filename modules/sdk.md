@@ -25,8 +25,11 @@ Kernel-only and freestanding work use their producer inputs without requiring an
 
 Start with the tools and dependencies needed by the task.
 Reuse compatible installed packages, shared caches, and build outputs.
-The SDK's input-key contract determines artifact compatibility.
-A matching version string or directory name alone does not establish equivalent inputs.
+The package version, target ABI, and recorded build inputs serve different purposes.
+The SDK build profile selects OS stages and checks their recorded inputs and outputs.
+If a set archive is missing, the plan schedules its producer again.
+Independent stages can keep their outputs. Ninja schedules the selected work within
+the available build budget. Each producer builds its stage with its own build rules.
 
 Binary client operations and source builds have different prerequisites.
 First installation uses a supported bootstrap path.
@@ -45,5 +48,6 @@ The name SDK therefore does not imply an implemented universal device API.
 - [First-install bootstrap](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/bootstrap-client.md)
 - [Host platforms](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/host-platforms.md)
 - [Tool selection](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md)
+- [Build profiles](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/build-profile.md)
 - [Input keys](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md)
 - [Sysroot producer](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/sysroot.md)
