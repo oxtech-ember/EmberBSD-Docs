@@ -131,3 +131,13 @@ Exact installer procedures remain beside sysinst, which links the immutable hist
 Startup, account, SSH and package details link to source manuals; DevBoards remains the hardware owner.
 The review checked current guided/expert installation limits and separates the implemented host SDK
 from the proposed device Runtime. It adds no build, VM or hardware acceptance result.
+
+## Build architecture review
+
+The [SDK build architecture](modules/sdk.md#build-architecture) was reviewed on 2026-11-22
+against SDK [`acb763c`](https://github.com/oxtech-ember/EmberBSD-SDK/commit/acb763c),
+Ports [`334dacdbb`](https://github.com/oxtech-ember/EmberBSD-Ports/commit/334dacdbb)
+and EmberBSD [`25fbc4a`](https://github.com/oxtech-ember/EmberBSD/commit/25fbc4a).
+It uses the SDK build profile, build workflow and client contracts, the prefix lock implementation,
+and the Ports cross-build README on revision-only changes.
+It adds no new build result.

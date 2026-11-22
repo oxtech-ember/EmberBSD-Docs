@@ -26,14 +26,39 @@ Kernel-only and freestanding work use their producer inputs without requiring an
 Start with the tools and dependencies needed by the task.
 Reuse compatible installed packages, shared caches, and build outputs.
 The package version, target ABI, and recorded build inputs serve different purposes.
-The SDK build profile selects OS stages and checks their recorded inputs and outputs.
-If a set archive is missing, the plan schedules its producer again.
-Independent stages can keep their outputs. Ninja schedules the selected work within
-the available build budget. Each producer builds its stage with its own build rules.
 
 Binary client operations and source builds have different prerequisites.
 First installation uses a supported bootstrap path.
 Signing and publication are maintainer operations, separate from ordinary package selection and installation.
+
+## Build architecture
+
+| Layer | Owner | Decides |
+| --- | --- | --- |
+| Profile | SDK format, task author | Platform and OS composition |
+| Plan | SDK | Selected stages, their input keys, and `ready` or `build` for each stage |
+| Execution | Ninja | Order and parallel work within one jobs budget |
+| Stage | OS, Ports | Compilation and installation inside the stage |
+
+The OS and Ports supply the dependency facts. The SDK does not describe a dependency a second time.
+A stage is `ready` while its input key matches and all its outputs exist.
+After a failure or an interruption, the next run builds only the stages that are not ready.
+Inside the OS stage, bmake rebuilds the objects that read a changed OS file.
+Changed prepared sources, tools, or `MK*` options give a new key and new object directories.
+
+| Output | Entry point |
+| --- | --- |
+| Clang kernels and development sets | `profile-plan` and `profile-build` |
+| Application sysroot | sysroot producer |
+| Release kit | OS release procedure |
+| Ports packages | package client `install`, outside the profile |
+
+A build that uses a host prefix or a sysroot reads it.
+A write into a prefix that another build reads stops before its first change.
+The installs of the reading build continue.
+Ports package inputs do not include the sysroot:
+see [revision-only changes](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/profiles/common-build-tools/cross/README.md#revision-only-changes)
+for a rebuild after an OS ABI change.
 
 ## Current boundary
 
@@ -49,5 +74,7 @@ The name SDK therefore does not imply an implemented universal device API.
 - [Host platforms](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/host-platforms.md)
 - [Tool selection](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md)
 - [Build profiles](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/build-profile.md)
+- [Build workflow](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/build-workflow.md)
+- [Prefix readers and writers](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/sdk-client.md#cache-and-interruption)
 - [Input keys](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md)
 - [Sysroot producer](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/sysroot.md)
