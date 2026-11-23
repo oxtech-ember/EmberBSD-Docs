@@ -141,3 +141,10 @@ and EmberBSD [`25fbc4a`](https://github.com/oxtech-ember/EmberBSD/commit/25fbc4a
 It uses the SDK build profile, build workflow and client contracts, the prefix lock implementation,
 and the Ports cross-build README on revision-only changes.
 It adds no new build result.
+
+## Kernel architecture review
+
+The [kernel architecture](configuration/kernel-and-hardware.md#kernel-architecture) was reviewed on 2026-11-23
+against EmberBSD [`230bbbc0`](https://github.com/oxtech-ember/EmberBSD/commit/230bbbc0):
+the kernel guide, `sys/arch/evbarm/conf/EMBER64` and `ember/build-kernel.sh`.
+It adds no new build result.
