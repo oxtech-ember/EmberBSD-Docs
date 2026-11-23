@@ -18,8 +18,18 @@ The board must still provide the expected bus connection, power, and firmware.
 Selecting that code does not establish radio operation on a new board.
 
 Read the current configuration and its source declarations when choosing exact entries.
-The linked `EMBER64` source is an AArch64 entry point, not a universal configuration for every target.
 Keep kernel and loadable modules from a compatible build.
+
+## Choose a kernel
+
+The OS keeps general-purpose configurations, one for each functional task;
+the [kernel guide](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/development/kernel.md#kernel-configurations)
+lists them. Drivers of absent devices stay passive, so one configuration
+serves many boards. Start with `EMBER64` for AArch64.
+
+A trial or diagnostic kernel for one board is a board configuration in
+DevBoards, with the evidence of what it was tested for. Use it only for that
+scenario, and keep a working general-purpose kernel for recovery.
 
 ## Hardware properties and firmware
 
