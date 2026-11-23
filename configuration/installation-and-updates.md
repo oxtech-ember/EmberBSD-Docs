@@ -62,9 +62,12 @@ Continue with [services and application configuration](services-and-applications
 | Application/package update | Package dependency closure, ABI/runtime and application data format | [Ports and SDK](packages-and-sdk.md), plus the application |
 | Firmware or loader update | Device revision, boot protocol, storage layout and recovery method | The selected DevBoards profile and firmware producer |
 
-A package update is not an OS upgrade. An installed package client is not an automatic whole-device rollback service.
-The [SDK update mechanism](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/automatic-updates.md)
-has its own scope; read it separately from the target OS procedure.
+An image with package updates enabled starts the native package client at boot.
+It checks the signed channel and updates compatible installed applications without a login.
+The image builder supplies the client, its runtime and HTTPS certificates.
+The device needs a working clock and network. The OS and firmware follow their own update procedures.
+See the [package image profile](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/image/README.md#package-updates-on-a-running-system)
+and the [package client](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/automatic-updates.md).
 
 An OS update preserves local policy while merging new defaults.
 Use the selected procedure's configuration staging and merge step, rather than replacing the live configuration directory with a set archive.
