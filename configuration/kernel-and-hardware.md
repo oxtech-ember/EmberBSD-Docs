@@ -27,9 +27,8 @@ the [kernel guide](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/deve
 lists them. Drivers of absent devices stay passive, so one configuration
 serves many boards. Start with `EMBER64` for AArch64.
 
-A trial or diagnostic kernel for one board is a board configuration in
-DevBoards, with the evidence of what it was tested for. Use it only for that
-scenario, and keep a working general-purpose kernel for recovery.
+A trial or diagnostic kernel is a temporary local configuration on top of a
+general-purpose one. Keep a working general-purpose kernel for recovery.
 
 ## Hardware properties and firmware
 
