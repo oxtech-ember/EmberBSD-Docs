@@ -27,8 +27,8 @@ Keep kernel and loadable modules from a compatible build.
   of the supported boards.
 - A driver without its device stays passive. One kernel therefore serves many
   boards, and DevBoards records use it.
-- Experimental code is compiled out or passive by default. A default-off option
-  or attachment flags select it.
+- Experimental code is off by default. A default-off option or non-default
+  attachment flags select it.
 - The kernel, its modules and its DTBs come from one build.
 
 To extend the kernel, add a passive built-in driver, a default-off option,
