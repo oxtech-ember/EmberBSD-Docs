@@ -20,15 +20,24 @@ Selecting that code does not establish radio operation on a new board.
 Read the current configuration and its source declarations when choosing exact entries.
 Keep kernel and loadable modules from a compatible build.
 
-## Choose a kernel
+## Kernel architecture
 
-The OS keeps general-purpose configurations, one for each functional task;
-the [kernel guide](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/development/kernel.md#kernel-configurations)
-lists them. Drivers of absent devices stay passive, so one configuration
-serves many boards. Start with `EMBER64` for AArch64.
+- The OS keeps one general-purpose configuration for each functional task, not
+  one for each board. For AArch64 it is `EMBER64`: `GENERIC64` with the drivers
+  of the supported boards.
+- A driver without its device stays passive. One kernel therefore serves many
+  boards, and DevBoards records use it.
+- Experimental code is compiled out or passive by default. A default-off option
+  or attachment flags select it.
+- The kernel, its modules and its DTBs come from one build.
 
-A trial or diagnostic kernel is a temporary local configuration on top of a
-general-purpose one. Keep a working general-purpose kernel for recovery.
+To extend the kernel, add a passive built-in driver, a default-off option,
+attachment flags or a loadable module. To try a change, build a temporary local
+configuration on top of the general-purpose one, by its path. An accepted trial
+moves into the general-purpose configuration. Keep a working general-purpose
+kernel for recovery. The
+[kernel guide](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/development/kernel.md#extend-the-kernel)
+gives the rule for each mechanism.
 
 ## Hardware properties and firmware
 
