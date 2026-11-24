@@ -31,6 +31,7 @@ then follow the linked procedure for the selected image or device.
 | Add an Ethernet controller, PHY, or USB adapter | [Ethernet architecture and standards](modules/ethernet.md), [driver interfaces](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net/docs/ethernet.md) |
 | Choose components for an appliance or desktop | [System image choices](configuration/system-profiles.md), [base OS](modules/base-os.md), [configuration map](configuration/README.md) |
 | Install, configure or update a device | [Installation model](configuration/installation-and-updates.md), [services and applications](configuration/services-and-applications.md) |
+| Map a laptop key or set up a touchpad | [Input devices and key mapping](modules/input.md): driver, libopeninput, XKB and compositor layers |
 | Add a GPU or display driver | [Graphics architecture and standards](modules/graphics-and-compute.md), [driver interfaces](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/external/bsd/drm2/drm/docs/README.md) |
 | Add an NPU or inference backend | [NPU architecture and technologies](modules/npu.md), [native and runtime interfaces](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/arch/arm/sunxi/docs/npu-integration.md) |
 | Accelerate a UI or inference workload | [Rendering and GPU compute](modules/graphics-and-compute.md), [NPU inference](modules/npu.md), [package selection](configuration/packages-and-sdk.md) |

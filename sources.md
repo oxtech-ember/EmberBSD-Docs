@@ -148,3 +148,15 @@ The [kernel architecture](configuration/kernel-and-hardware.md#kernel-architectu
 against EmberBSD [`230bbbc0`](https://github.com/oxtech-ember/EmberBSD/commit/230bbbc0):
 the kernel guide, `sys/arch/evbarm/conf/EMBER64` and `ember/build-kernel.sh`.
 It adds no new build result.
+
+## Input review
+
+The [input chapter](modules/input.md) was checked on 2026-11-24 against:
+
+| Owner | Reviewed revision | Material used |
+| --- | --- | --- |
+| EmberBSD | [`2cc0af18d191`](https://github.com/oxtech-ember/EmberBSD/tree/2cc0af18d19151e3b0c5c5d8a093aa852d462f6d) | wscons event and gesture interface, Precision Touchpad driver settings and contract tests, laptop touchpad discovery |
+| Ports | [`e1f07b796a42`](https://github.com/oxtech-ember/EmberBSD-Ports/tree/e1f07b796a4234411a51137c58cf6b19fc2cf9e6) | libopeninput wscons backend, hwdb scan code mapping and its test, `fnmedia` layout options |
+| systemd | [`v262.2`](https://github.com/systemd/systemd/blob/v262.2/hwdb.d/60-keyboard.hwdb) | hwdb record format and the keyboard records that the libopeninput package installs |
+
+The review describes the mapping mechanism. It claims no physical key result for a laptop model.
