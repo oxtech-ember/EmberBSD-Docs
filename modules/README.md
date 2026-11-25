@@ -19,6 +19,7 @@ Subsystem pages explain architecture. Their linked owner documents define the de
 | [Input devices and key mapping](input.md) | Keyboard and touchpad events, key code mapping, layout options, and the layer to change | EmberBSD and Ports; hardware results in DevBoards |
 | [Graphics and compute](graphics-and-compute.md) | DRM/KMS, Mesa/Vulkan, buffer sharing, UI acceleration, and driver integration | EmberBSD, Ports, and applications; hardware applicability in DevBoards |
 | [NPU and inference](npu.md) | Model/runtime/compiler boundaries, operator support, memory and execution, and new backend integration | EmberBSD and Ports; hardware applicability in DevBoards |
+| [Updates](updates.md) | Signed channel, OS package service, client settings, installation and recovery | EmberBSD and EmberBSD-SDK |
 | [Ports](ports.md) | Shared recipes, patches, package roots, and dependency graph | EmberBSD-Ports |
 | [SDK](sdk.md) | Host tools, cross builds, sysroots, packages, and release composition | EmberBSD-SDK |
 | [Spark](spark.md) | Optional task agent, model access, MCP, and Lua extensions | EmberBSD-Spark |

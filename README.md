@@ -30,6 +30,7 @@ then follow the linked procedure for the selected image or device.
 | Add a Bluetooth controller or profile | [Bluetooth architecture, profiles and proposed extensions](modules/bluetooth.md), [driver interfaces](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/netbt/docs/README.md) |
 | Add an Ethernet controller, PHY, or USB adapter | [Ethernet architecture and standards](modules/ethernet.md), [driver interfaces](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/net/docs/ethernet.md) |
 | Choose components for an appliance or desktop | [System image choices](configuration/system-profiles.md), [base OS](modules/base-os.md), [configuration map](configuration/README.md) |
+| Understand or configure updates | [Update services, trust, configuration and activation](modules/updates.md) |
 | Install, configure or update a device | [Installation model](configuration/installation-and-updates.md), [services and applications](configuration/services-and-applications.md) |
 | Map a laptop key or set up a touchpad | [Input devices and key mapping](modules/input.md): driver, libopeninput, XKB and compositor layers |
 | Add a GPU or display driver | [Graphics architecture and standards](modules/graphics-and-compute.md), [driver interfaces](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/external/bsd/drm2/drm/docs/README.md) |
