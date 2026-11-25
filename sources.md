@@ -167,3 +167,7 @@ The [update architecture](modules/updates.md) uses the native client and publish
 from [SDK 37b7c16](https://github.com/oxtech-ember/EmberBSD-SDK/commit/37b7c16)
 and the [OS image package service](https://github.com/oxtech-ember/EmberBSD/blob/e120f07b8276e317e7bcb549de2816d0b49f5d84/ember/image/README.md).
 The [rc.d service implementation](https://github.com/oxtech-ember/EmberBSD/blob/e120f07b8276e317e7bcb549de2816d0b49f5d84/etc/rc.d/ember_pkg_update) defines process ownership, startup order and logging.
+
+The OS service uses one signed profile descriptor and its referenced sets for each trial.
+The boot backend prepares the inactive root, consumes the one-shot request and confirms local health.
+[SDK cohort verification](https://github.com/oxtech-ember/EmberBSD-SDK/blob/844722714bdcfc4d027e24f3f24197cd777ce691/src/emberbsd_sdk/os_update.py) · [OS service contract](https://github.com/oxtech-ember/EmberBSD/blob/63835ad9/ember/tools/docs/automatic-system-update.md) · [Trial watchdog](https://github.com/oxtech-ember/EmberBSD/blob/67f45fa9c3f188c16da3bdbd0e5ed2c5ed9431a8/ember/development/kernel.md)

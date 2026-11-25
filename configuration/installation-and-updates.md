@@ -77,7 +77,8 @@ For the service setting, manual update and last successful pass, see [the packag
 ### Update an installed OS
 
 Start with the [installed system update procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/tools/docs/installed-system-update.md) for a VM or physical machine.
-Select a compatible release and collect its verified artifacts before applying changes.
+On a provisioned two-slot image, enable the OS update service. It selects the signed release and verifies the trial boot.
+For an installer-based upgrade, select a compatible release and collect its verified artifacts before applying changes.
 The installed profile determines the installer and boot path. Some [sysinst images](https://github.com/oxtech-ember/EmberBSD/blob/main/usr.sbin/sysinst/docs/vm-installation.md#upgrade-and-configuration-merge) deliberately refuse upgrade.
 Hardware documentation supplies boot file locations and recovery instructions when a physical target requires them.
 See [OS delivery and activation](../modules/updates.md#os-delivery-and-activation) for the boundary between fetching a file and booting a release.
@@ -90,7 +91,7 @@ A board uses its own boot-loader and storage procedure. Replacing a file on a bo
 
 Restoring a backup discards later changes unless they were saved separately.
 Verify that the backup is readable and that the recovery route boots before relying on it.
-There is no general accepted automatic OS rollback service implied by these recipes.
+On an image with automatic OS updates, the boot loader returns to the confirmed slot after a failed trial.
 After update or recovery, verify the build identity, configuration, data and the same useful operation across a normal reboot.
 
 For a failure report, identify the expected operation, actual result, build and last successful stage.

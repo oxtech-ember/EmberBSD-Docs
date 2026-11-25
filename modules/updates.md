@@ -14,9 +14,12 @@ Package update    rc.d/ember_pkg_update -> SDK auto-update -> SDK update <- HTTP
                                                 |                 |
                                          /var/log/messages      pkgdb
 
-OS update         user or installer -> SDK fetch-artifact <- HTTPS/S3
-                                              |
-                                        verified files -> installer -> boot loader
+OS update         rc.d/ember_os_update -> SDK fetch-os-update <- HTTPS/S3
+                         |                        |
+                         |                 verified OS cohort
+                         +-> inactive slot -> one-shot boot -> local health check
+                                                    |                 |
+                                              reset and restore    confirm slot
 ```
 
 | Component | Responsibility |
@@ -76,6 +79,30 @@ After a replacement, run the application and check its saved settings. Applicati
 
 ## OS delivery and activation
 
+On an image provisioned for two boot slots, the OS service checks the signed channel at startup and periodically.
+The image selects a hardware and kernel profile. The SDK verifies its generation, target and complete set of artifacts in one release.
+A custom kernel needs a release from its configured provider.
+
+1. The service downloads the new cohort and locks the package state while preparing the inactive slot.
+2. The boot backend stages the kernel, modules, userland and configuration. The previous root remains bootable.
+3. The loader consumes one trial request before starting the candidate. A hardware or platform watchdog limits the trial.
+4. The service checks the running root, kernel revision, release digest and local application health.
+   Successful checks commit the new default. An unconfirmed trial times out, resets and returns to the previous default.
+5. The returned system records the attempted generation. A later published generation can start another trial.
+
+| Setting or service | Purpose |
+| --- | --- |
+| `ember_os_update=YES` | Starts OS checks on an image provisioned with the loader, slots and reset timer. |
+| `/etc/ember-os-update.json` | Selects the installed profile, boot backend and local health check. |
+| `/etc/ember-os-health` | Checks readiness on the device, including services required by the image. Confirmation can run offline. |
+| `syslogd` | Records the attempted generation and the result. Read `/var/log/messages` for `ember_os_update`. |
+
+Each root keeps its system and installed packages. Put mutable data that must survive switching either way on shared storage.
+Both releases must support the shared data format. A failed configuration merge leaves the current system running.
+[OS service and boot backend](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/tools/docs/automatic-system-update.md) · [SDK release client](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/sdk-client.md)
+
+### Other installed profiles
+
 The same client can fetch a named OS artifact from a signed release. An ordinary user can download to a private FFS directory. The command verifies the archive and writes the requested file.
 The installer needs administrative access to change the running system.
 The installed OS profile determines which kernel, modules, base and configuration sets belong together.
@@ -85,5 +112,5 @@ Check the firmware or loader, disk layout and any required device tree only when
 An OS update needs a supported installation path for the selected profile. Stage its sets, preserve a recoverable installation and merge new defaults.
 If an interface changes across kernel and userland, install both sides before the first new boot as required by that interface.
 After activation, verify the loaded revision, root filesystem, network and a service with its saved settings.
-The package service updates applications. Unattended OS activation, boot confirmation and automatic rollback still require separate implementation and acceptance.
+The installer and its recovery procedure apply until the image has a qualified two-slot boot profile.
 [Installed OS update procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/tools/docs/installed-system-update.md) · [Signed artifact download](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/sdk-client.md#download-one-release-artifact)
