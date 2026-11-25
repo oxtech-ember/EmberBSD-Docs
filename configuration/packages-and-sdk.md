@@ -41,6 +41,7 @@ The native prefix supplies build tools; the target sysroot supplies target heade
 Adding application roots and updating installed components are different user intentions.
 Removing a root from a later selection does not automatically remove an installed package.
 The client's source and reference define the exact operations and safeguards for each intention.
+For an installed device, see [automatic package updates](installation-and-updates.md#update-packages-on-a-running-device).
 
 ## Read the complete contracts
 

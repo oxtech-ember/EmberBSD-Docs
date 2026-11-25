@@ -62,12 +62,40 @@ Continue with [services and application configuration](services-and-applications
 | Application/package update | Package dependency closure, ABI/runtime and application data format | [Ports and SDK](packages-and-sdk.md), plus the application |
 | Firmware or loader update | Device revision, boot protocol, storage layout and recovery method | The selected DevBoards profile and firmware producer |
 
-An image with package updates enabled starts the native package client at boot.
-It checks the signed channel and updates compatible installed applications without a login.
-The image builder supplies the client, its runtime and HTTPS certificates.
-The device needs a working clock and network. The OS and firmware follow their own update procedures.
-See the [package image profile](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/image/README.md#package-updates-on-a-running-system)
-and the [package client](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/automatic-updates.md).
+### How a binary reaches the device
+
+Ports supplies package recipes. The producer reuses matching binaries from the channel and builds missing or changed components.
+The OS build supplies the kernel and distribution sets. A maintainer records checked artifacts in the release manifest and publishes them to S3.
+The publisher verifies new objects through HTTPS before switching the signed channel pointer to the new release.
+The device uses its release trust root to verify the signatures on `current.p7m` and `release.p7m`.
+The signed manifest records the hashes of package catalogs and artifacts. Devices can read the channel without publisher credentials.
+The client checks the target, dependencies and package versions when planning an update. For a named OS artifact, the board procedure selects the ID.
+The client checks each downloaded artifact against its recorded size and SHA-256. Native package tools also verify the package signature.
+An existing installation can therefore use published binaries without a source checkout or compiler.
+See the [publisher and channel contract](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/s3-distribution.md).
+
+### Update packages on a running device
+
+On an image with package updates enabled, the `ember_pkg_update` service starts at boot.
+It reads the installed package database and asks the native SDK client to update those packages and their required dependencies.
+The client reuses compatible installed versions and verified cached archives. Native package tools apply replacements and run installation hooks.
+An installed package absent from the catalog stays installed. The update report identifies it for follow-up.
+The image supplies the client, its runtime, HTTPS certificates and release trust root. The device needs network access and a valid clock.
+After a temporary network failure, the service retries. Its log shows whether it downloaded, replaced or reused packages.
+For a single application, preview its update first. Check its saved settings and a useful operation after the update.
+See the [image service](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/image/README.md#package-updates-on-a-running-system)
+and the [device update commands](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/automatic-updates.md).
+
+### Update the OS on an installed board
+
+The same channel can deliver OS sets. A signed download provides a verified file. The board procedure controls installation and activation.
+Select the boot set for the exact board and loader. Select base system sets for its architecture, profile and OS revision.
+For example, the Zero 3W and Zero 4 can use compatible AArch64 packages but require the correct device tree for each board.
+A custom kernel needs its matching modules and board configuration. Keep its boot path until a compatible update is available.
+When the Wi-Fi station ABI changes, install the matching WPA userland and kernel before the first reboot.
+After reboot, confirm the new kernel revision, reconnect over the expected network and check a service with its saved settings.
+See the [signed artifact download](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/sdk-client.md#download-one-release-artifact)
+and the [Zero 3W update procedure](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/boards/a733-zero3w/update.md).
 
 An OS update preserves local policy while merging new defaults.
 Use the selected procedure's configuration staging and merge step, rather than replacing the live configuration directory with a set archive.

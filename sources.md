@@ -160,3 +160,10 @@ The [input chapter](modules/input.md) was checked on 2026-11-24 against:
 | systemd | [`v262.2`](https://github.com/systemd/systemd/blob/v262.2/hwdb.d/60-keyboard.hwdb) | hwdb record format and the keyboard records that the libopeninput package installs |
 
 The review describes the mapping mechanism. It claims no physical key result for a laptop model.
+
+## Binary updates
+
+The [device update guide](configuration/installation-and-updates.md#how-a-binary-reaches-the-device) uses the native client and publisher contracts
+from [SDK 37b7c16](https://github.com/oxtech-ember/EmberBSD-SDK/commit/37b7c16)
+and the [OS image package service](https://github.com/oxtech-ember/EmberBSD/blob/e120f07b8276e317e7bcb549de2816d0b49f5d84/ember/image/README.md).
+The board example follows the [Zero 3W procedure](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/3688560c6095e4d6249229b8e89b9552953aa134/boards/a733-zero3w/update.md).
