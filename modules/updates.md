@@ -79,16 +79,17 @@ After a replacement, run the application and check its saved settings. Applicati
 
 ## OS delivery and activation
 
-On an image provisioned for two boot slots, the OS service checks the signed channel at startup and periodically.
+At startup the OS service checks the local boot slots. A confirmed system with no pending trial checks the signed channel.
+After a successful pass, the service waits one hour.
 The image selects a hardware and kernel profile. The SDK verifies its generation, target and complete set of artifacts in one release.
 A custom kernel needs a release from its configured provider.
 
-1. The service downloads the new cohort and locks the package state while preparing the inactive slot.
-2. The boot backend stages the kernel, modules, userland and configuration. The previous root remains bootable.
+1. The service locks the package state before it downloads the selected release and prepares the inactive slot.
+2. The boot backend stages the kernel, modules, userland and configuration. The service records the attempted generation in the current root before requesting a trial.
 3. The loader consumes one trial request before starting the candidate. A hardware or platform watchdog limits the trial.
 4. The service checks the running root, kernel revision, release digest and local application health.
    Successful checks commit the new default. An unconfirmed trial times out, resets and returns to the previous default.
-5. The returned system records the attempted generation. A later published generation can start another trial.
+5. After rollback, the previous root reads its attempt record and skips that generation. A newer compatible release can start another trial.
 
 | Setting or service | Purpose |
 | --- | --- |
