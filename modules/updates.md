@@ -37,6 +37,17 @@ TLS authenticates the network endpoint. The separate EmberBSD release root authe
 The manifest identifies each artifact by size and SHA-256. Packages also carry a signature that native package tools verify before installation.
 [Publisher contract](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/s3-distribution.md) · [Signature chain](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/signed-releases.md)
 
+## Hardware profile and boot slots
+
+The embedded image builder takes two inputs. The board selects the firmware and its storage layout.
+The optional update profile selects the boot adapter, slot labels, kernel, device trees, modules and release target.
+The signed profile ID stays the same when the image build command changes.
+
+The FFS installer copies the running system from a snapshot, applies the selected OS sets and merges site configuration.
+The boot adapter reads the running and confirmed slots. It schedules one trial and confirms the slot after the health check.
+The U-Boot selector takes its RAM addresses and root labels from the profile.
+[Image build and service contract](https://github.com/oxtech-ember/EmberBSD/blob/4786829fa46/ember/tools/docs/automatic-system-update.md)
+
 ## What the image configures
 
 | Setting or file | Meaning on a device with the package layer |
