@@ -69,19 +69,20 @@ It identifies the required image services, configuration files, trust roots and 
 
 ### Update packages on a running device
 
-Images with the package layer can update installed applications at boot and periodically afterwards.
-For the service setting, manual update and last successful pass, see [the package update cycle](../modules/updates.md#one-package-update-cycle).
+On an enrolled image, run `ember-update status` to read the last check. Run `ember-update history` to verify completed updates.
+The image starts one service for packages and OS releases. See [automatic update settings](../modules/updates.md#enable-automatic-updates).
 
 <a id="update-the-os-on-an-installed-board"></a>
 
 ### Update an installed OS
 
 Start with the [installed system update procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/tools/docs/installed-system-update.md) for a VM or physical machine.
-On a provisioned two-slot image, enable the OS update service. It selects the signed release and verifies the trial boot.
+A provisioned two-slot image stages a compatible release automatically. Select a reboot window in `rc.conf` for unattended activation.
+After restarting, inspect the confirmed slot and history. Verify the application settings and the installed generation in the OS receipt.
 For an installer-based upgrade, select a compatible release and collect its verified artifacts before applying changes.
 The installed profile determines the installer and boot path. Some [sysinst images](https://github.com/oxtech-ember/EmberBSD/blob/main/usr.sbin/sysinst/docs/vm-installation.md#upgrade-and-configuration-merge) deliberately refuse upgrade.
 Hardware documentation supplies boot file locations and recovery instructions when a physical target requires them.
-See [OS delivery and activation](../modules/updates.md#os-delivery-and-activation) for the boundary between fetching a file and booting a release.
+See [OS delivery and activation](../modules/updates.md#what-happens-at-installation) for the boundary between fetching a file and booting a release.
 
 ## Recovery is a complete state choice
 

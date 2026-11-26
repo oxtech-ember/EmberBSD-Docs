@@ -15,7 +15,7 @@ For worked choices from flash storage to desktop packages, read
 | Base image | Userland outputs, startup integration, and root contents | OS build inputs and SDK image/release configuration | Build, image assembly, and installation |
 | Host SDK | Native prefix, target sysroot, cache, and source inputs | SDK workspace/client configuration | Planning, building, and package operations |
 | Package selection | Task roots and native/target roles | Ports package sets and explicit `PKGPATH` arguments | Package planning and installation |
-| Installed updates | Package service policy, release channel, target repository, state and cache | [Device update configuration](../modules/updates.md#what-the-image-configures) | At boot and on each package update pass |
+| Installed updates | OS and package policy, release channel, reboot window and local status | [Device update configuration](../modules/updates.md#enable-automatic-updates) | At boot and on each package update pass |
 | System services | Enabled daemons and their settings | `/etc/rc.conf` and service-specific files | Startup or the service's documented reload/restart |
 | Input mapping | Scan code records and keyboard layout options | libopeninput hwdb files; session keyboard settings ([input](../modules/input.md)) | Compositor start |
 | Application | Endpoints, models, tools, state, and user policy | Application-owned configuration | Application startup or its supported reload |
