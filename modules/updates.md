@@ -14,7 +14,7 @@ Python, the development SDK and S3 publisher credentials belong on the build hos
 | Common installer | Install verified local package archives with `pkg_add`. On FFS slots, copy the running root from a snapshot and prepare the inactive root. |
 | Boot adapter | Report the running and confirmed slots. Arm, cancel or confirm a one-time trial using the firmware's boot interface. |
 | Hardware profile | Identify the target ABI, boot files, partition labels, hardware reset provider and local health check. |
-| Discover and the notifier | Read local update state. Discover requests an authorized apply through polkit. The base service owns the transaction. |
+| Discover and the notifier | Read local update state. Discover uses polkit to request an update or to install the package version selected in the Store. The base service owns the transaction. |
 
 The TLS certificate store authenticates the HTTPS endpoint. The release root in
 `/etc/openssl/emberbsd-release-root.pem` authenticates the publisher.
@@ -60,13 +60,21 @@ Applications that share data across slots must support its format after rollback
 
 The service writes public state atomically to `/var/db/ember-update/state.json`.
 It records the last verified channel release, available OS generation, packages, reboot requirement, kernel hold and recent history.
-After confirmation, the available generation clears. Root can read the installed generation from `/var/db/ember-update/os-release.json`.
-The desktop reads that file for update notifications. Read the local history after restarting to distinguish preparation, confirmation and rollback.
+The desktop reads this public state for update notifications. Read the local history after restarting to distinguish preparation, confirmation and rollback.
+After confirmation, the available generation clears. Root can read the installed generation from the private receipt in `/var/db/ember-update/os-release.json`.
+
+Discover obtains its Store catalog from `ember-update catalog`. An ordinary user can read it.
+Installation requires authorization. The client verifies that the selected version still belongs to the current signed catalog.
+It installs the application and its dependencies with the same storage and rollback policy as other package changes.
+[Store command contract](https://github.com/oxtech-ember/EmberBSD/blob/main/usr.sbin/ember-update/README.md#store-catalog-and-application-installation)
 
 ## Older installations and other media
 
 Check for `/usr/sbin/ember-update` and the installed profile first.
 An older image with `ember_os_update` uses its original release and recovery procedure until it migrates or is reinstalled.
+A publisher can supply a signed transition release for an existing FFS profile.
+The old service prepares the candidate. The native service verifies the old receipt, the candidate and its health before confirming it.
+[Transition release requirements](https://github.com/oxtech-ember/EmberBSD/blob/main/usr.sbin/ember-update/README.md#one-time-transition-from-the-former-ffs-updater)
 Use the hardware profile to check boot and recovery support. A second partition alone cannot reset a hung kernel.
 A NOR image needs space for a complete recoverable candidate and firmware that can select it.
 [Installed-system procedures](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/tools/docs/installed-system-update.md) · [Hardware profiles](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json)
