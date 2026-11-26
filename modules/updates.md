@@ -72,9 +72,13 @@ It installs the application and its dependencies with the same storage and rollb
 
 Check for `/usr/sbin/ember-update` and the installed profile first.
 An older image with `ember_os_update` uses its original release and recovery procedure until it migrates or is reinstalled.
-A publisher can supply a signed transition release for an existing FFS profile.
-The old service prepares the candidate. The native service verifies the old receipt, the candidate and its health before confirming it.
-[Transition release requirements](https://github.com/oxtech-ember/EmberBSD/blob/main/usr.sbin/ember-update/README.md#one-time-transition-from-the-former-ffs-updater)
+A publisher can supply one signed transition release for an enrolled legacy U-Boot FFS profile.
+The SDK prepares the transition base and etc sets from the stock sets and the matching image description.
+The old service stages the candidate. At first boot the native service checks the old receipt, the running kernel and local health.
+The confirmed generation becomes the minimum for later updates. The service imports the old OS and package enable flags.
+Local overrides keep their priority. Later updates use the standard sets.
+[Prepare a transition release](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/signed-releases.md#prepare-a-transition-from-the-former-ffs-updater) · [First boot and recovery](https://github.com/oxtech-ember/EmberBSD/blob/main/usr.sbin/ember-update/README.md#one-time-transition-from-the-former-ffs-updater)
+
 Use the hardware profile to check boot and recovery support. A second partition alone cannot reset a hung kernel.
 A NOR image needs space for a complete recoverable candidate and firmware that can select it.
 [Installed-system procedures](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/tools/docs/installed-system-update.md) · [Hardware profiles](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json)
