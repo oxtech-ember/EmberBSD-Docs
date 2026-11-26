@@ -21,6 +21,11 @@ The TLS certificate store authenticates the HTTPS endpoint. The release root in
 Machines with a compatible target can share package archives. Their OS profiles also identify the kernel, boot files and modules.
 [Native client and signed release contract](https://github.com/oxtech-ember/EmberBSD/blob/main/usr.sbin/ember-update/README.md)
 
+The S3 channel serves one current inventory. After switching the signed channel pointer, the publisher removes superseded metadata and files.
+Records that enrolled devices still need to download must stay in the current inventory.
+After an unconfirmed trial, the loader selects the confirmed local root on the next boot, even without a network connection.
+[S3 layout and retention](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/s3-distribution.md)
+
 ## Enable automatic updates
 
 Enrolled images start `/etc/rc.d/ember_update` after networking and TLS initialization.
