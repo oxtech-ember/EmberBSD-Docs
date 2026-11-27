@@ -86,7 +86,9 @@ A publisher can supply one signed transition release for an enrolled legacy U-Bo
 The SDK prepares the transition base and etc sets from the stock sets and the matching image description.
 The old service stages the candidate. At first boot the native service checks the old receipt, the running kernel and local health.
 The confirmed generation becomes the minimum for later updates. The service imports the old OS and package enable flags.
-Local overrides keep their priority. Later updates use the standard sets.
+On that boot the rc script reads the imported settings, applies local overrides, and starts the native service if enabled.
+If an earlier transition left the service stopped with `ember_update=YES`, a normal system reboot starts it.
+Later updates use the standard sets.
 [Prepare a transition release](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/signed-releases.md#prepare-a-transition-from-the-former-ffs-updater) · [First boot and recovery](https://github.com/oxtech-ember/EmberBSD/blob/main/usr.sbin/ember-update/README.md#one-time-transition-from-the-former-ffs-updater)
 
 Use the hardware profile to check boot and recovery support. A second partition alone cannot reset a hung kernel.
