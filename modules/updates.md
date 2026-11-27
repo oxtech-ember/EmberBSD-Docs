@@ -30,6 +30,9 @@ After an unconfirmed trial, the loader selects the confirmed local root on the n
 
 Enrolled images start `/etc/rc.d/ember_update` after networking and TLS initialization.
 The service checks at boot and then hourly. It retries delivery failures.
+A device that loses time while powered off can temporarily reject a new signed channel.
+Check UTC with `date -u`. If NTP is enabled, `ntpq -pn` shows the selected peer.
+After the clock synchronizes, the service retries automatically. If the channel has expired at the correct time, the publisher must refresh it.
 At boot, the rc script also checks an already staged trial when periodic updates are disabled.
 The image supplies `/etc/ember-update-profile.json`. Administrators set policy in `/etc/rc.conf`.
 This example selects the current channel and permits automatic restarts between 01:00 and 04:00 local time.
