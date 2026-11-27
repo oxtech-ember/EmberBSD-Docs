@@ -62,7 +62,9 @@ With a local kernel, status reports an OS hold. Compatible package updates can p
 On two-slot systems the installer compares the previous and new distribution defaults with the site's configuration.
 A conflicting edit stops preparation. The service arms the loader only after it verifies the installation receipt.
 The loader consumes the trial request before entering the candidate.
-A local health check and matching boot identity confirm the slot. On failure the reset provider restarts the system into the confirmed root.
+The updater verifies the candidate's boot identity and runs the profile's local health check.
+It retries the check while startup services become ready. All attempts share one time limit.
+A successful check permits confirmation. If the trial fails, the reset provider restarts the system from the confirmed root.
 The service records the failed OS generation and waits for a newer compatible release.
 Applications that share data across slots must support its format after rollback.
 
