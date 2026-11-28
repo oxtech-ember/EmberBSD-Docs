@@ -62,7 +62,8 @@ With a local kernel, status reports an OS hold. Compatible package updates can p
 For a package-only update, the installer compares the spare root with a snapshot of the running system.
 It keeps matching files on the spare root, removes stale entries and copies changes, including local settings.
 The comparison takes time even for a small package, but saves writes to the device.
-On an empty spare root every file must be copied. If the file system cannot be reused, the installer creates a fresh one.
+On an empty spare root every file must be copied.
+After a forced restart the spare file system can fail its check. The installer then creates a fresh one and copies the snapshot.
 The package and its registration change together on the spare root. A failed trial returns to the previous versions of both.
 
 On two-slot systems the installer compares the previous and new distribution defaults with the site's configuration.
