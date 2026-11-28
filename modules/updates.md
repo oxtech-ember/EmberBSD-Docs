@@ -11,7 +11,7 @@ Python, the development SDK and S3 publisher credentials belong on the build hos
 | Ports and OS build host | Build binary packages, distribution sets, kernels and matching modules. |
 | SDK publisher | Resolve package dependencies for each target. Publish immutable artifacts, a signed release and the signed channel pointer to S3. |
 | Base service | Fetch the channel over HTTPS. Verify both CMS signatures, validity periods, target identity, archive sizes and SHA-256. Select an eligible OS generation and installed packages. |
-| Common installer | Install verified local package archives with `pkg_add`. On FFS slots, copy the running root from a snapshot and prepare the inactive root. |
+| Common installer | Prepare the inactive FFS root from a snapshot of the running system. Install verified local package archives with `pkg_add`. |
 | Boot adapter | Report the running and confirmed slots. Arm, cancel or confirm a one-time trial using the firmware's boot interface. |
 | Hardware profile | Identify the target ABI, boot files, partition labels, hardware reset provider and local health check. |
 | Discover and the notifier | Read local update state. Discover uses polkit to request an update or to install the package version selected in the Store. The base service owns the transaction. |
@@ -58,6 +58,12 @@ With a local kernel, status reports an OS hold. Compatible package updates can p
 | --- | --- |
 | Single root | The service updates installed packages in place. Each successful registration is visible immediately. An interruption can leave a partially applied package selection. For an OS upgrade, use the profile's separate installation procedure. |
 | Two FFS roots with a qualified boot adapter | Both package-only and OS updates prepare a complete inactive root. The running root stays available until a trial passes. |
+
+For a package-only update, the installer compares the spare root with a snapshot of the running system.
+It keeps matching files on the spare root, removes stale entries and copies changes, including local settings.
+The comparison takes time even for a small package, but saves writes to the device.
+On an empty spare root every file must be copied. If the file system cannot be reused, the installer creates a fresh one.
+The package and its registration change together on the spare root. A failed trial returns to the previous versions of both.
 
 On two-slot systems the installer compares the previous and new distribution defaults with the site's configuration.
 A conflicting edit stops preparation. The service arms the loader only after it verifies the installation receipt.
